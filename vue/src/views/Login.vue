@@ -16,9 +16,12 @@
         <label for="password">Password</label>
         <input class="userbox" type="password" id="password" v-model="user.password" required />
       </div>
+      <div class="sgnbutton">
       <button class="sgnbutton" type="submit">Sign in</button>
+      </div>
       <p class="sgnbutton">
       <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
+      
     </form>
   </div>
 </template>
@@ -62,7 +65,7 @@ export default {
 </script>
 <style>
 body{
-  
+  display: block;
 background-image: url("../assets/Background1.jpg");
   background-size: 100vw 100vh;  
 
@@ -72,6 +75,7 @@ background-image: url("../assets/Background1.jpg");
 <style scoped>
 .form-input-group {
   margin-bottom: 1rem;
+  padding-right: 3%;
   
 }
 label {
@@ -92,10 +96,11 @@ button{
 .sgnbutton{
   display: flex;
   justify-content: center;
+  align-content: center;
   
 }
 .userbox{
-  
+  background-color: #FEFAE0;
   height: 40px;
   width: 250px;
   border-radius: 12px;
@@ -107,9 +112,8 @@ input{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  padding-top: 22%;
+  size: 100%;
+  padding-top: 20%;
   
   }
 
