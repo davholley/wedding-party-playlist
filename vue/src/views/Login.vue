@@ -8,16 +8,16 @@
       <div role="alert" v-if="this.$route.query.registration">
         Thank you for registering, please sign in.
       </div>
-      <div class="form-input-group">
+      <div  class="form-input-group">
         <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
+        <input class="userbox" type="text"  v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
         <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
+        <input class="userbox" type="password" id="password" v-model="user.password" required />
       </div>
-      <button type="submit">Sign in</button>
-      <p>
+      <button class="sgnbutton" type="submit">Sign in</button>
+      <p class="sgnbutton">
       <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
     </form>
   </div>
@@ -60,12 +60,57 @@ export default {
   }
 };
 </script>
+<style>
+body{
+  
+background-image: url("../assets/Background1.jpg");
+  background-size: 100vw 100vh;  
 
+
+}
+</style>
 <style scoped>
 .form-input-group {
   margin-bottom: 1rem;
+  
 }
 label {
+  width:75px;
+  display: inline-block;
   margin-right: 0.5rem;
+  
 }
+h1{
+  display: flex;
+  justify-content: center;
+  
+}
+button{
+  display: flex;
+  justify-content: center;
+}
+.sgnbutton{
+  display: flex;
+  justify-content: center;
+  
+}
+.userbox{
+  
+  height: 40px;
+  width: 250px;
+  border-radius: 12px;
+}
+input{
+  height: 15px;
+}
+#login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 22%;
+  
+  }
+
 </style>
