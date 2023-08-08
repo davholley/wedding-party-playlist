@@ -19,6 +19,10 @@
       <div class="sgnbutton">
       <button class="sgnbutton" type="submit">Sign in</button>
       </div>
+      <div class="sgnbutton">
+        <button class="sgnbutton" @click.prevent="spotify">Login with spotify</button>
+      </div>
+      
       <p class="sgnbutton">
       <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
       
@@ -27,8 +31,10 @@
 </template>
 
 <script>
+
 import authService from "../services/AuthService";
 
+import spotifyService from "../services/SpotifyService"
 export default {
   name: "login",
   components: {},
@@ -38,10 +44,28 @@ export default {
         username: "",
         password: ""
       },
-      invalidCredentials: false
+      invalidCredentials: false,
+      client_id : '6d7a9526161e48ba94c6d297e82b6075',
+      redirect_uri : 'http://localhost:8080/login',
+
+     scope : 'playlist-modify-public user-read-email',
+
+    url : 'https://accounts.spotify.com/authorize'
     };
   },
   methods: {
+  
+    spotify(){
+    let state = this.generateRandomString(16);
+    this.$store.state.stateKey = state,
+    this.url += '?response_type=token';
+    this.url += '&client_id=' + encodeURIComponent(this.client_id);
+    this.url += '&scope=' + encodeURIComponent(this.scope);
+    this.url += '&redirect_uri=' + encodeURIComponent(this.redirect_uri);
+    this.url += '&state=' + encodeURIComponent(state);
+    window.location.href = this.url;
+    }
+    ,
     login() {
       authService
         .login(this.user)
@@ -60,7 +84,60 @@ export default {
           }
         });
     }
+    ,
+    generateRandomString(length)  {
+      let result = '';
+      const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+       }
+      return result;
+    }
+
   }
+  ,
+  created(){
+   if (window.location.hash){
+     
+    let hash  = window.location.hash;
+    let after = hash.substring(1);
+      let urlParams = after.split("&");
+      let splitParams = urlParams.reduce((accum, val)=> {
+      let [key,value] = val.split("=");
+      accum[key] = value;
+      
+      return accum;
+      },{});
+
+      let token = splitParams.access_token;
+      this.$store.state.bearer = token;
+      spotifyService.getSpotifyUser(token).then((spotResponse) => {
+        let tempUser = spotResponse.data;
+        
+        this.user.username = tempUser.display_name;
+        this.user.password = tempUser.email + tempUser.id
+         let registerUser = {
+           username: this.username,
+        password: this.password,
+        confirmPassword: this.password,
+        role: 'user',
+         }
+         localStorage.tempUser = this.user;
+          
+        authService
+          .register(registerUser)
+          .then(
+            (responser) =>{if (responser.status === 201 ){this.user = localStorage.tempUser; this.login()}}
+          ).catch((error) =>{
+            if(error.response.status === 400){
+         this.login()}
+            
+          })
+      })
+
+  }
+}
 };
 </script>
 <style>
