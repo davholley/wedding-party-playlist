@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <p>If you are seeing this, you are authenticated.</p>
-    <form action="" >
-      <input  v-model="playlist.name" type="text" name="playlistName" id="playlistName">
-      <input  v-model="playlist.description" type="text" name="playlistDesc" id="playlistDesc">
+    <h1>Welcome Home</h1>
+    
+    <form  action="" >
+      <input class="userbox" v-model="playlist.name" type="text" name="playlistName" id="playlistName">
+      <input class="userbox" v-model="playlist.description" type="text" name="playlistDesc" id="playlistDesc">
     </form>
     <button @click.prevent="createPlaylist">Create Playlist</button>
     
@@ -44,4 +44,62 @@ export default {
   }
 };
 </script>
+<style>
+body{
+  display: block;
+background-image: url("../assets/Background1.jpg");
+  background-size: 100vw 100vh;  
 
+
+
+}
+</style>
+<style scoped>
+.form-input-group {
+  margin-bottom: 1rem;
+  padding-right: 3%;
+  
+}
+label {
+  width:75px;
+  display: inline-block;
+  margin-right: 0.5rem;
+  
+}
+h1{
+  display: flex;
+  justify-content: center;
+  letter-spacing: 3px;
+  font-family: 'JosephSophia';
+  font-size: 90px;
+  color: #D4a373;
+  text-shadow: 4px 4px black ;
+  
+}
+button{
+  display: flex;
+  justify-content: center;
+  border-radius: 6px;
+  line-height: 22px;
+  background-color: #fcf7d9;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+   font-style: italic;
+}
+.sgnbutton{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 3px;
+  
+  
+}
+.userbox{
+  background-color: #FEFAE0;
+  height: 40px;
+  width: 280px;
+  border-radius: 12px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+   font-style: italic;
+}
+
+</style>

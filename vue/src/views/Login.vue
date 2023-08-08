@@ -20,7 +20,7 @@
       <button class="sgnbutton" type="submit">Sign in</button>
       </div>
       <div class="sgnbutton">
-        <button  class="sgnbutton" @click.prevent="spotify" >Login with spotify</button>
+        <button  class="sgnbutton" @click.prevent="spotify" >DJ Login</button>
       </div>
       
       <p class="sgnbutton">
@@ -151,22 +151,25 @@ export default {
 };
 </script>
 <style>
-body{
-  display: block;
-background-image: url("../assets/Background1.jpg");
-  background-size: 100vw 100vh;  
+  body{
+    display: flex;
+  background-image: url("../assets/Background1.jpg");
+    background-size: 100vw 100vh;  
+  justify-content: center;
+    align-self: center;
 
 
-
-}
-</style>
-<style scoped>
-.form-input-group {
-  margin-bottom: 1rem;
-  padding-right: 3%;
-  
-}
-label {
+  }
+  </style>
+  <style scoped>
+  .form-input-group {
+    margin-bottom: 1rem;
+    padding-right: 3%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+   font-style: italic;
+    
+  }
+  label {
   width:75px;
   display: inline-block;
   margin-right: 0.5rem;
@@ -178,8 +181,8 @@ h1{
   letter-spacing: 3px;
   font-family: 'JosephSophia';
   font-size: 90px;
-  color: #D4a373;
-  text-shadow: 4px 4px black ;
+  color: #d1985e;
+  text-shadow: 4px 4px rgb(10, 9, 9) ;
   
 }
 button{
@@ -194,9 +197,10 @@ button{
   justify-content: center;
   align-content: center;
   margin: 3px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+   font-style: italic;
   
-  
-}
+}             
 .userbox{
   background-color: #FEFAE0;
   height: 40px;
@@ -209,10 +213,7 @@ input{
 #login{
   display: flex;
   justify-content: center;
-  align-items: center;
-  size: 100%;
-  padding-top: 13%;
-  
+  padding-top: 15% ;
   }
 
 </style>
