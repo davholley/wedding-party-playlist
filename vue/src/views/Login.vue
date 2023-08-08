@@ -112,29 +112,37 @@ export default {
 
       let token = splitParams.access_token;
       this.$store.state.bearer = token;
+      
       spotifyService.getSpotifyUser(token).then((spotResponse) => {
-        let tempUser = spotResponse.data;
+        let dat = spotResponse.data;
         
-        this.user.username = tempUser.display_name;
-        this.user.password = tempUser.email + tempUser.id
-         let registerUser = {
-           username: this.username,
-        password: this.password,
-        confirmPassword: this.password,
-        role: 'user',
+        localStorage.setItem("tempPassword", dat.email + dat.id );
+        localStorage.setItem("tempUserName",dat.display_name); 
+        
+        this.user.username = localStorage.getItem("tempUserName");
+        this.user.password = localStorage.getItem("tempPassword");
+
+        let registerUser = {
+        "username": localStorage.getItem("tempUserName") ,
+        "password": localStorage.getItem("tempPassword"),
+        "confirmPassword": localStorage.getItem("tempPassword"),
+        "role": "user",
          }
-         localStorage.tempUser = this.user;
+         
           
-        authService
-          .register(registerUser)
-          .then(
-            (responser) =>{if (responser.status === 201 ){this.user = localStorage.tempUser; this.login()}}
+        authService.register(registerUser).then((responser) =>{
+          if (responser.status === 201 ){this.user.username = localStorage.getItem("tempUserName");
+        this.user.password = localStorage.getItem("tempPassword"); this.login()}
+          }
           ).catch((error) =>{
             if(error.response.status === 400){
-         this.login()}
-            
+         this.login()
+         }
           })
-      })
+
+       })
+      
+      
 
   }
 }

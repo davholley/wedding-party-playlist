@@ -60,7 +60,7 @@ public class AuthenticationController {
             userDao.create(newUser.getUsername().toLowerCase(),newUser.getPassword(), newUser.getRole());
         }
     }
-   
+
 
 }
 
