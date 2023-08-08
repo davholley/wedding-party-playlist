@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <form @submit.prevent="login">
+    <form @submit.prevent="login" v-show="!isHash">
       <h1 >Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
@@ -50,8 +50,8 @@ export default {
 
      scope : 'playlist-modify-public user-read-email',
 
-    url : 'https://accounts.spotify.com/authorize'
-   
+    url : 'https://accounts.spotify.com/authorize',
+    isHash : false
     };
   },
   methods: {
@@ -101,7 +101,7 @@ export default {
   ,
   created(){
    if (window.location.hash){
-     
+     this.isHash = true;
     let hash  = window.location.hash;
     let after = hash.substring(1);
       let urlParams = after.split("&");
