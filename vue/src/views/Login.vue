@@ -64,7 +64,7 @@ export default {
     this.url += '&scope=' + encodeURIComponent(this.scope);
     this.url += '&redirect_uri=' + encodeURIComponent(this.redirect_uri);
     this.url += '&state=' + encodeURIComponent(state);
-    window.open(this.url, '_blank');
+    window.location.href = this.url;
     
     }
     ,
@@ -75,7 +75,7 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/DjHome");
+            this.$router.push("/");
           }
         })
         .catch(error => {
