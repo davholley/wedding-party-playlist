@@ -113,11 +113,11 @@ export default {
       },{});
 
       let token = splitParams.access_token;
-      this.$store.state.bearer = token;
+      localStorage.setItem("bearer" ,token);
       
       spotifyService.getSpotifyUser(token).then((spotResponse) => {
         let dat = spotResponse.data;
-        
+        localStorage.setItem( "spotifyId", dat.id);
         localStorage.setItem("tempPassword", dat.email + dat.id );
         localStorage.setItem("tempUserName",dat.display_name); 
         
