@@ -75,7 +75,7 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
+            this.$router.push("/DjHome");
           }
         })
         .catch(error => {
@@ -155,7 +155,8 @@ body{
   display: block;
 background-image: url("../assets/Background1.jpg");
   background-size: 100vw 100vh;  
-font-family: 'JosephSophia';
+
+
 
 }
 </style>
@@ -174,6 +175,11 @@ label {
 h1{
   display: flex;
   justify-content: center;
+  letter-spacing: 3px;
+  font-family: 'JosephSophia';
+  font-size: 90px;
+  color: #D4a373;
+  text-shadow: 4px 4px black ;
   
 }
 button{
