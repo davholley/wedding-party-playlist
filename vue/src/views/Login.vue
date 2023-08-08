@@ -20,7 +20,7 @@
       <button class="sgnbutton" type="submit">Sign in</button>
       </div>
       <div class="sgnbutton">
-        <button class="sgnbutton" @click.prevent="spotify">Login with spotify</button>
+        <button  class="sgnbutton" @click.prevent="spotify" >Login with spotify</button>
       </div>
       
       <p class="sgnbutton">
@@ -51,6 +51,7 @@ export default {
      scope : 'playlist-modify-public user-read-email',
 
     url : 'https://accounts.spotify.com/authorize'
+   
     };
   },
   methods: {
@@ -63,7 +64,8 @@ export default {
     this.url += '&scope=' + encodeURIComponent(this.scope);
     this.url += '&redirect_uri=' + encodeURIComponent(this.redirect_uri);
     this.url += '&state=' + encodeURIComponent(state);
-    window.location.href = this.url;
+    window.open(this.url, '_blank');
+    
     }
     ,
     login() {
@@ -177,17 +179,22 @@ h1{
 button{
   display: flex;
   justify-content: center;
+  border-radius: 6px;
+  line-height: 22px;
+  background-color: #fcf7d9;
 }
 .sgnbutton{
   display: flex;
   justify-content: center;
   align-content: center;
+  margin: 3px;
+  
   
 }
 .userbox{
   background-color: #FEFAE0;
   height: 40px;
-  width: 250px;
+  width: 280px;
   border-radius: 12px;
 }
 input{
@@ -198,7 +205,7 @@ input{
   justify-content: center;
   align-items: center;
   size: 100%;
-  padding-top: 20%;
+  padding-top: 13%;
   
   }
 
