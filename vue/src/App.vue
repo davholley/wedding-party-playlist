@@ -11,9 +11,14 @@
 
 
    <style>
+   @font-face {
+    font-family: 'JosephSophia';
+    src: url('./assets/font/josephsophia.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
  .fa-house{
    color: #FEFAE0;
  }
-  @import url('https://www.dafont.com/josephsophia.font');
-
+  
    </style>

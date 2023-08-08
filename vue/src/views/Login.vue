@@ -155,7 +155,7 @@ body{
   display: block;
 background-image: url("../assets/Background1.jpg");
   background-size: 100vw 100vh;  
-
+font-family: 'JosephSophia';
 
 }
 </style>
