@@ -58,7 +58,7 @@ export default {
   
     spotify(){
     let state = this.generateRandomString(16);
-    this.$store.state.stateKey = state,
+    
     this.url += '?response_type=token';
     this.url += '&client_id=' + encodeURIComponent(this.client_id);
     this.url += '&scope=' + encodeURIComponent(this.scope);
