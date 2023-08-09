@@ -26,8 +26,15 @@ CREATE TABLE songs(
 	album VARCHAR(255),
 	playlist_id  VARCHAR(255),
 	must_play boolean,
+	do_not_play boolean,
 	CONSTRAINT FK_playlist_id FOREIGN KEY(playlist_id) REFERENCES playlists(playlist_id)
 );
-
+CREATE TABLE playlist_users(
+	user_id INT, 
+	playlist_id VARCHAR(255),
+	CONSTRAINT FK_playlist_id FOREIGN KEY(playlist_id) REFERENCES playlists(playlist_id),
+	CONSTRAINT FK_user_id FOREIGN KEY(user_id) REFERENCES users(user_id),
+	CONSTRAINT PK_playlist_users PRIMARY KEY (user_id, playlist_id)
+);
 
 COMMIT TRANSACTION;

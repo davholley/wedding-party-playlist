@@ -15,15 +15,16 @@ public class JdbcPostDao {
     }
 
     public void addPlaylist(Playlist playlist) throws DaoException {
-        String sql = "Insert into playlists (playlist_id, playlist_name, dj_id) values (?,?,?);";
-        try {
-            jdbcTemplate.update(sql, playlist.getPlaylistId(), playlist.getPlaylistName(), playlist.getDj_id());
+            String sql = "Insert into playlists (playlist_id, playlist_name, dj_id) values (?,?,?); " +
+                    "INSERT into playlist_users(playlist_id, user_id) VALUES (?, ?);";
+            try {
+                jdbcTemplate.update(sql, playlist.getPlaylistId(), playlist.getPlaylistName(), playlist.getDj_id(), playlist.getPlaylistId(), playlist.getDj_id());
 
-        }  catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
-        }
+            }  catch (CannotGetJdbcConnectionException e) {
+                throw new DaoException("Unable to connect to server or database", e);
+            } catch (DataIntegrityViolationException e) {
+                throw new DaoException("Data integrity violation", e);
+            }
     }
 
 
