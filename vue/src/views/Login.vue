@@ -1,5 +1,6 @@
 <template>
   <div id="login">
+    
     <form @submit.prevent="login" v-show="!isHash">
       <h1 >Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">

@@ -21,6 +21,7 @@ export default {
   name: "home",
   data(){
   return {  playlist: {"name": "New Playlist","description": "New playlist description","public": true},
+  playlists: {}
 }
   },
   
@@ -40,8 +41,14 @@ export default {
 
         }
       );
+    },
+    
+  },
+  created(){
+      DatabaseService.getPlaylists(this.$store.state.user.id).then((response)=>{
+        this.playlists = response.data;
+      });
     }
-  }
 };
 </script>
 <style>
