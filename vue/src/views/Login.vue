@@ -1,8 +1,11 @@
 <template>
+
   <div id="login">
     
-    <form @submit.prevent="login" v-show="!isHash">
-      <h1 >Please Sign In</h1>
+      <form @submit.prevent="login" v-show="!isHash">
+        
+      <h1 ><span class="box-outer"> Please Sign In </span></h1>
+     
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -20,15 +23,16 @@
       <div class="sgnbutton">
       <button class="sgnbutton" type="submit">Sign in</button>
       </div>
-      <div class="sgnbutton">
-        <button  class="sgnbutton" @click.prevent="spotify" >DJ Login</button>
-      </div>
       
-      <p class="sgnbutton">
+      <p class="sgnbutton" id="spotify">
       <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
-      
+      <div id="spotify" class="sgnbutton" @click.prevent="spotify" ><i class="fa-brands fa-spotify fa-2xl"></i></div>
+   
+
     </form>
-  </div>
+    
+</div>
+
 </template>
 
 <script>
@@ -180,12 +184,23 @@ export default {
 h1{
   display: flex;
   justify-content: center;
+  align-self: center;
   letter-spacing: 3px;
   font-family: 'JosephSophia';
   font-size: 90px;
   color: #d1985e;
   text-shadow: 4px 4px rgb(10, 9, 9) ;
   
+}
+.box-outer {
+  background-color: rgb(254, 250, 224, .75);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-self: center;
+  border-radius: 12px;
+  width: 500px;
+  height: 100px;
 }
 button{
   display: flex;
@@ -218,6 +233,10 @@ input{
   display: flex;
   justify-content: center;
   padding-top: 15% ;
+  }
+  #spotify{
+    padding-top: 15px;  
+    color: rgb(1, 83, 1); 
   }
 
 </style>
