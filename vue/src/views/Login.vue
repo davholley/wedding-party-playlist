@@ -9,12 +9,12 @@
         Thank you for registering, please sign in.
       </div>
       <div  class="form-input-group">
-        <label for="username">Username</label>
-        <input class="userbox" type="text"  v-model="user.username" required autofocus />
+        
+        <input class="userbox" type="text" name="username"  v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <label for="password">Password</label>
-        <input class="userbox" type="password" id="password" v-model="user.password" required />
+       
+        <input class="userbox" type="password" name="password" id="password" v-model="user.password" required />
       </div>
       <div class="sgnbutton">
       <button class="sgnbutton" type="submit">Sign in</button>
@@ -41,8 +41,8 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: ""
+        username:"username" ,
+        password: "password"
       },
       invalidCredentials: false,
       client_id : '6d7a9526161e48ba94c6d297e82b6075',
@@ -163,11 +163,12 @@ export default {
   </style>
   <style scoped>
   .form-input-group {
+    display: flex;
     margin-bottom: 1rem;
-    padding-right: 3%;
     font-family: Georgia, 'Times New Roman', Times, serif;
    font-style: italic;
-    
+    justify-content: center;
+    align-items: center;
   }
   label {
   width:75px;
@@ -206,6 +207,8 @@ button{
   height: 40px;
   width: 280px;
   border-radius: 12px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
 }
 input{
   height: 15px;

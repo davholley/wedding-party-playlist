@@ -7,15 +7,16 @@
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
-        <input class="userbox" type="text" id="username" v-model="user.username" required autofocus />
+        <input class="userbox" type="text" name="username" id="username" v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
         <label for="password">Password</label>
-        <input  class="userbox" type="password" id="password" v-model="user.password" required />
+        <input  class="userbox" type="password" name="password"  id="password" v-if="showPassword"  v-model="user.password" required />
+
       </div>
       <div class="form-input-group">
         <label for="confirmPassword">Confirm Password</label>
-        <input  class="userbox" type="password" id="confirmPassword" v-model="user.confirmPassword" required />
+        <input  class="userbox" type="password" name="confirm password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
       <div class="sgnbutton">
       <button type="submit">Create Account</button>
@@ -34,9 +35,9 @@ export default {
   data() {
     return {
       user: {
-        username: '',
-        password: '',
-        confirmPassword: '',
+        username: 'username',
+        password: 'password',
+        confirmPassword: 'confirm password',
         role: 'user',
       },
       registrationErrors: false,
@@ -120,14 +121,16 @@ button{
   border-radius: 6px;
   line-height: 22px;
   background-color: #fcf7d9;
-  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
 }
 .userbox{
   background-color: #FEFAE0;
   height: 40px;
   width: 280px;
   border-radius: 12px;
-  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;  
 }
 
 .sgnbutton{
