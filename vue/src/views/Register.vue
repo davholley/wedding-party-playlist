@@ -1,7 +1,7 @@
 <template>
   <div id="register" class="text-center">
     <form @submit.prevent="register">
-      <h1>Create Account</h1>
+      <h1>Creat{{e}}accoun{{t}}</h1>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -34,6 +34,8 @@ export default {
   name: 'register',
   data() {
     return {
+      e: '\ue00e',
+      t: '\ue01d',
       user: {
         username: 'username',
         password: 'password',

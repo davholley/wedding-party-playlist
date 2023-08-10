@@ -4,7 +4,7 @@
     
       <form @submit.prevent="login" v-show="!isHash">
         
-      <h1 ><span class="box-outer"> Please Sign In </span></h1>
+      <h1><span class="box-outer"> Please Sign I{{n}} </span></h1>
      
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
@@ -41,7 +41,8 @@ export default {
   name: "login",
   components: {},
   data() {
-    return {
+    return  {
+      n: '\ue017',
       user: {
         username:"username" ,
         password: "password"
@@ -183,7 +184,7 @@ export default {
     margin-right: 0.5rem;
 }
 h1{
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     font-family: 'JosephSophia';
     font-size: 90px;
     color: #d1985e;

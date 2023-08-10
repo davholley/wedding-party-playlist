@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Welcome Home</h1>
+    <h1>Welcome Hom{{e}}</h1>
     
     <form  action="" >
       <input class="userbox" v-model="playlist.name" type="text" name="playlistName" id="playlistName">
@@ -28,7 +28,9 @@ export default {
   name: "home",
   
   data(){
-  return {  playlist: {"name": "New Playlist","description": "New playlist description","public": true},
+  return {
+  e: '\ue00e',
+  playlist: {"name": "New Playlist","description": "New playlist description","public": true},
   DatabasePlaylists: {},
   SpotifyPlaylists : [],
   hasSpotify: false
