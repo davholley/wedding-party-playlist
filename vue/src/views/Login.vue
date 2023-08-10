@@ -13,17 +13,14 @@
         Thank you for registering, please sign in.
       </div>
       <div  class="form-input-group">
-        
         <input class="userbox" type="text" name="username"  v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-       
         <input class="userbox" type="password" name="password" id="password" v-model="user.password" required />
       </div>
       <div class="sgnbutton">
       <button class="sgnbutton" type="submit">Sign in</button>
       </div>
-      
       <p class="sgnbutton" id="spotify">
       <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
       <div id="spotify" class="sgnbutton" @click.prevent="spotify" ><i class="fa-brands fa-spotify fa-2xl"></i></div>
@@ -155,86 +152,80 @@ export default {
 }
 };
 </script>
+
 <style>
   body{
     display: flex;
-  background-image: url("../assets/Background1.jpg");
+    background-image: url("../assets/Background1.jpg");
     background-size: 100vw 100vh;  
-  justify-content: center;
+    justify-content: center;
     align-self: center;
-
-
   }
   </style>
+
   <style scoped>
+  #login{
+    display: flex;
+    justify-content: center;
+    padding-top: 15% ;
+  }
   .form-input-group {
     display: flex;
     margin-bottom: 1rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
-   font-style: italic;
+    font-style: italic;
     justify-content: center;
     align-items: center;
   }
   label {
-  width:75px;
-  display: inline-block;
-  margin-right: 0.5rem;
-  
+    width:75px;
+    display: inline-block;
+    margin-right: 0.5rem;
 }
 h1{
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  letter-spacing: 3px;
-  font-family: 'JosephSophia';
-  font-size: 90px;
-  color: #d1985e;
-  text-shadow: 4px 4px rgb(10, 9, 9) ;
-  
+    letter-spacing: 3px;
+    font-family: 'JosephSophia';
+    font-size: 90px;
+    color: #d1985e;
+    text-shadow: 4px 4px rgb(10, 9, 9) ;
 }
 .box-outer {
-  background-color: rgb(254, 250, 224, .75);
-  display: flex;
-  justify-content: center;
-  position: relative;
-  align-self: center;
-  border-radius: 12px;
-  width: 500px;
-  height: 100px;
+    background-color: rgb(254, 250, 224, .75);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-self: center;
+    border-radius: 12px;
+    width: 500px;
+    height: 100px;
 }
 button{
-  display: flex;
-  justify-content: center;
-  border-radius: 6px;
-  line-height: 22px;
-  background-color: #fcf7d9;
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    line-height: 22px;
+    background-color: #fcf7d9;
 }
 .sgnbutton{
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: 3px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-   font-style: italic;
-  
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 3px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
 }             
 .userbox{
-  background-color: #FEFAE0;
-  height: 40px;
-  width: 280px;
-  border-radius: 12px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-style: italic;
+    background-color: #FEFAE0;
+    height: 40px;
+    width: 280px;
+    border-radius: 12px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
 }
 input{
-  height: 15px;
+   height: 15px;
 }
-#login{
-  display: flex;
-  justify-content: center;
-  padding-top: 15% ;
-  }
-  #spotify{
+#spotify{
     padding-top: 15px;  
     color: rgb(1, 83, 1); 
   }
