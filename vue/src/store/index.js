@@ -22,7 +22,9 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    spotifyId : localStorage.getItem("spotifyId")
+    spotifyId : localStorage.getItem("spotifyId"),
+   
+
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
