@@ -1,8 +1,8 @@
 <template>
-   <div class="formfield" id="getPlaylist"> 
+   <div class="formfield" id="playlistName"> 
     <label for="playList">{{ labelText }}</label>
-    <select id="getPlayList" name="PlayList" class="formfield selectbox"
-      @change="updateSelectionChoice" v-model="selectedId">
+    <select id="playlistName" name="PlaylistName" class="formfield selectbox"
+      @change="updateSelectionChoice" v-model="playlist.name">
       <option value="">--- Please Select a Playlist ---</option>
       
     </select>
@@ -20,9 +20,11 @@
 
 export default {
   name: "home",
-  props:["SpotifyPlaylists"],
+  props: ["SpotifyPlaylists"],
   data(){
   return{
+    playlist: "",
+    
 
   }
   }
@@ -37,12 +39,13 @@ section{
 /* h1,h2{
  
  } */
-main{
+option{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100px;
+  
 
 }
 

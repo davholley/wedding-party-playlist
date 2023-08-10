@@ -10,7 +10,9 @@
    
     <play-list v-bind:SpotifyPlaylists="SpotifyPlaylists"></play-list>
     
-    
+     <div class="formfield" id="playlistName">
+       <selection-box class="playlistName" v-bind="SpotifyPlaylists" mutation="SET_USER"/>
+          </div>
   </div>
 </template>
 
