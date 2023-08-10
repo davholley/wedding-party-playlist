@@ -11,7 +11,7 @@
       </div>
       <div class="form-input-group">
         <label for="password">Password</label>
-        <input  class="userbox" type="password" name="password"  id="password" v-if="showPassword"  v-model="user.password" required />
+        <input  class="userbox" type="password" name="password"  id="password" v-model="user.password" required />
 
       </div>
       <div class="form-input-group">

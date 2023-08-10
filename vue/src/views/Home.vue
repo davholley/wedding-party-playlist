@@ -5,8 +5,9 @@
     <form  action="" >
       <input class="userbox" v-model="playlist.name" type="text" name="playlistName" id="playlistName">
       <input class="userbox" v-model="playlist.description" type="text" name="playlistDesc" id="playlistDesc">
+       <button @click.prevent="createPlaylist">Create Playlist</button>
     </form>
-    <button @click.prevent="createPlaylist">Create Playlist</button>
+   
     <play-list v-bind:SpotifyPlaylists="SpotifyPlaylists"></play-list>
     
     
