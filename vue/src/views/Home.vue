@@ -53,6 +53,7 @@ export default {
     
   },
   created(){
+      SpotifyService.getBearer()
       DatabaseService.getPlaylists(this.$store.state.user.id).then((response)=>{
         
         this.DatabasePlaylists = response.data;
