@@ -22,8 +22,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    spotifyId : localStorage.getItem("spotifyId"),
-   
+  
+    
 
   },
   mutations: {
@@ -40,6 +40,7 @@ export default new Vuex.Store({
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('bearer');
+     
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};

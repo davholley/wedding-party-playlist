@@ -9,7 +9,8 @@ export default{
     },
     createPlaylist(bearer, playlist){
         axios.defaults.headers.common['Authorization'] = `Bearer ${bearer}`
-        let response = axios.post("https://api.spotify.com/v1/users/" + store.state.spotifyId + "/playlists",
+        let id = localStorage.getItem("spotifyId");
+        let response = axios.post("https://api.spotify.com/v1/users/" + id + "/playlists",
           playlist,);
          axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`
          return response;
