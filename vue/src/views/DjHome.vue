@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Play Lists</h1>
+        <h1>Guests</h1>
         
     </div>
 </template>
@@ -11,7 +11,7 @@ import PlayList from '@/components/PlayList.vue';
 
 
 export default {
-    name: 'dj-home',
+    name: 'guest-home',
     components: PlayList,
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
-   <div class="formfield" id="playlistselect"> 
+   <div class="formfield" id="getPlaylist"> 
     <label for="playList">{{ labelText }}</label>
-    <select id="playList" name="playList" class="formfield selectbox"
+    <select id="getPlayList" name="PlayList" class="formfield selectbox"
       @change="updateSelectionChoice" v-model="selectedId">
       <option value="">--- Please Select a Playlist ---</option>
       
@@ -37,8 +37,13 @@ section{
 /* h1,h2{
  
  } */
-.playlists{
+main{
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+
 }
 
 .formfield {
