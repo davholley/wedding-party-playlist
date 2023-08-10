@@ -31,6 +31,7 @@ export default {
   return {  playlist: {"name": "New Playlist","description": "New playlist description","public": true},
   DatabasePlaylists: {},
   SpotifyPlaylists : [],
+  hasSpotify: false
 }
   },
   
