@@ -28,8 +28,9 @@
           <input class="search-box" v-model="searchQuery" type="text" placeholder="Search for a song...">
           <button @click.prevent="searchSong">Search</button>
         </div>
+        <div class="search-results-container">
         <search-results :results="searchResults" @add-must-have="addMustHaveSong" @add-do-not-play="addDoNotPlaySong" @add-to-playlist="addSongToPlaylist"></search-results>
-
+        </div>
         <!-- Must-Have Songs Container -->
         <div class="must-have-container song-container" @drop="dropMustHave" @dragover.prevent>
           <h2>Must-Have Songs</h2>
@@ -152,6 +153,9 @@ export default {
     }
 };
 </script>
+<style>
+
+</style>
 <style scoped>
 body {
   display: block;
@@ -244,10 +248,13 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'JosephSophia';
 }
 
 .search-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin: 20px;
   width: 100%;
@@ -258,6 +265,7 @@ button {
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
+  
 }
 
 .song-container {
@@ -267,6 +275,8 @@ button {
   margin: 20px;
   width: 50%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a card effect */
+  
+
 }
 
 .must-have-container ul,
@@ -287,8 +297,10 @@ button {
 }
 
 h2 {
-  font-family: 'Georgia', 'Times New Roman', Times, serif;
-  font-style: italic;
+  font-family: 'JosephSophia';
+  font-size:xx-large;
+  letter-spacing: 4px;
   color: #333;
+
 }
 </style>
