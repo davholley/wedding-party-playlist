@@ -46,9 +46,22 @@ export default{
        let response =axios.get(`https://api.spotify.com/v1/playlists/${id}`)
        axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`
 
-       
-    
        return response;
-   }
+   },
+   searchSong(bearer, query) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${bearer}`;
+    let response = axios.get(`https://api.spotify.com/v1/search?q=${query}&type=track`);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
+    return response;
+  },
+  addSongToPlaylist(bearer, playlistId, trackUri) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${bearer}`;
+    let response = axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      uris: [trackUri],
+    });
+    axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
+    return response;
+  },
+   
 
 }
