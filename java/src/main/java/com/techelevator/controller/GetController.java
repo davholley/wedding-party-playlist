@@ -40,6 +40,15 @@ public class GetController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-   
+
+    @GetMapping("/{id}/others")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<String> getOtherUsers(@PathVariable int id){
+        try {
+            return jdbcGetDao.getOtherUsers(id);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

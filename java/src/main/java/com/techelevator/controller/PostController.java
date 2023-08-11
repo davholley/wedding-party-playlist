@@ -33,11 +33,42 @@ public class PostController {
     }
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping("/song/add")
-    public  void addSong(Song song){
+    public void requestSong(@Valid @RequestBody Song song){
         try{
             jdbcPostDao.addSong(song);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping("/playlist/add/{userId}")
+    public void addUserToPlayList(@Valid @RequestBody String playlistId, @PathVariable int userId){
+        try {
+            jdbcPostDao.addUserToPlaylist(playlistId,userId);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping("/playlist/{id}/deny")
+    public void denySong(@PathVariable String id, @Valid @RequestBody String SongID){
+        try{
+            jdbcPostDao.denySong(id,SongID);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping("/playlist/{playlistId}")
+    public void removeUserFromPlaylist( @PathVariable String playlistId, @Valid @RequestBody int id){
+        try{
+            jdbcPostDao.RemoveUserFromPlaylist(playlistId,id);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 }

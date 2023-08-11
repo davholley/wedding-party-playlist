@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Playlist;
 import com.techelevator.model.Song;
+import com.techelevator.model.User;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -62,6 +63,27 @@ public class JdbcGetDao {
         playlist.setPlaylistName(rowSet.getString("playlist_name"));
         return playlist;
     }
+
+    public List<String> getOtherUsers(int id) throws DaoException {
+        List<String> users = new ArrayList<String>();
+        String sql = "SELECT * FROM Users WHERE user_id != ?";
+        try {
+            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,id);
+            while (rowSet.next()) {
+                users.add(rowSet.getString("username"));
+
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return users;
+    }
+
+
+
     public Song mapRowToSong(SqlRowSet rowSet) {
         Song song = new Song();
         song.setSongId(rowSet.getString("song_id"));
