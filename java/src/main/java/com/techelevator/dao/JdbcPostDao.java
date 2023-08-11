@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Playlist;
+import com.techelevator.model.Song;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,5 +28,16 @@ public class JdbcPostDao {
             }
     }
 
+    public void addSong(Song song) throws DaoException {
+        String sql = "Insert into songs (song_id, title, artist, album, playlist_id, must_play, do_not_play) values (?,?,?,?,?,?,?);";
+        try {
+            jdbcTemplate.update(sql,song.getSongId(), song.getTitle(), song.getArtist(), song.getAlbum(), song.getPlaylistId(), song.isMustPlay(), song.isDoNotPlay());
+
+        }  catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
 
 }

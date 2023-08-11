@@ -10,9 +10,13 @@
    
     <play-list v-bind:SpotifyPlaylists="SpotifyPlaylists"></play-list>
     
-     <div class="formfield" id="playlistName">
+    <div class="formfield" id="playlistName">
        <selection-box class="playlistName" v-bind="SpotifyPlaylists" mutation="SET_USER"/>
-          </div>
+    </div>
+    <div>
+      <input type="search" name="searchSpotify" id="SearchSpotify" v-model="searchQuery">
+      <button @click="searchSpotify">Search</button>
+    </div>
   </div>
 </template>
 
@@ -35,7 +39,9 @@ export default {
   playlist: {"name": "New Playlist","description": "Playlist Description","public": true},
   DatabasePlaylists: {},
   SpotifyPlaylists : [],
-  hasSpotify: false
+  hasSpotify: false,
+  spotifySearchResults : {},
+  searchQuery : ""
 }
   },
   
@@ -56,6 +62,11 @@ export default {
         }
       );
     },
+    searchSpotify(){
+       SpotifyService.findSong(this.searchQuery).then((response)=>{
+         this.spotifySearchResults = response.data;
+       });
+    }
     
   },
   created(){

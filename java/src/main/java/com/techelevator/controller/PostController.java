@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.DaoException;
 import com.techelevator.dao.JdbcPostDao;
 import com.techelevator.model.Playlist;
+import com.techelevator.model.Song;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +27,15 @@ public class PostController {
     public void addPlaylist(@Valid @RequestBody Playlist playlist){
         try {
             jdbcPostDao.addPlaylist(playlist);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping("/song/add")
+    public  void addSong(Song song){
+        try{
+            jdbcPostDao.addSong(song);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

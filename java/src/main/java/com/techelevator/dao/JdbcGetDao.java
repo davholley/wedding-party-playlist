@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Playlist;
+import com.techelevator.model.Song;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,7 +37,23 @@ public class JdbcGetDao {
         }
         return playlists;
     }
+    public List<Song> getPlaylistSongs( String id) throws DaoException {
+        List<Song> songs = new ArrayList<Song>();
+        String sql = "SELECT * FROM Songs WHERE playlist_id = ?";
+        try {
+            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,id);
+            while (rowSet.next()) {
+                songs.add(mapRowToSong(rowSet));
 
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return songs;
+    }
 
     public Playlist mapRowToPlaylist(SqlRowSet rowSet) {
         Playlist playlist = new Playlist();
@@ -44,6 +61,17 @@ public class JdbcGetDao {
         playlist.setPlaylistId(rowSet.getString("playlist_id"));
         playlist.setPlaylistName(rowSet.getString("playlist_name"));
         return playlist;
+    }
+    public Song mapRowToSong(SqlRowSet rowSet) {
+        Song song = new Song();
+        song.setSongId(rowSet.getString("song_id"));
+        song.setAlbum(rowSet.getString("album"));
+        song.setArtist(rowSet.getString("artist"));
+        song.setTitle(rowSet.getString("title"));
+        song.setPlaylistId(rowSet.getString("playlist_id"));
+        song.setMustPlay(rowSet.getBoolean("must_play"));
+        song.setDoNotPlay(rowSet.getBoolean("do_not_play"));
+        return song;
     }
 
 }

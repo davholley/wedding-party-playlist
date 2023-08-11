@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.DaoException;
 import com.techelevator.dao.JdbcGetDao;
 import com.techelevator.model.Playlist;
+import com.techelevator.model.Song;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,6 +26,16 @@ public class GetController {
     public List<Playlist> getUserPlaylists(@PathVariable int id) {
         try {
             return jdbcGetDao.getUserPlaylist(id);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/playlist/{id}/songs")
+    @ResponseStatus(HttpStatus.FOUND )
+    public List<Song> getPlaylistSongs(@PathVariable String id){
+        try{
+            return  jdbcGetDao.getPlaylistSongs(id);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

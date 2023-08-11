@@ -3,6 +3,7 @@ import store from "../store";
 import QueryString from "qs";
 import  {Buffer} from "buffer";
 
+
 export default{
     getSpotifyUser(token){
         return axios.get("https://api.spotify.com/v1/me", {headers: {'Authorization': `Bearer ${token}`}});
@@ -49,6 +50,23 @@ export default{
        
     
        return response;
+   },
+   findSong(title){
+     let titleSplit = title.split(" ");
+     let titleString = ""
+     for (let i = 0; i < titleSplit.length; i++){
+       if (i == 0){
+         titleString = titleSplit[i];
+       }
+       else{
+         titleString += "+" + titleSplit[i];
+       }
+     }
+     
+     let bearer = localStorage.getItem("spotifyBearer")
+     axios.defaults.headers.common['Authorization'] = `Bearer ${bearer}`
+     let response = axios.get(`https://api.spotify.com/v1/search?q=track%3A${titleString}&type=track`);
+     axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`
+     return response;
    }
-
 }
