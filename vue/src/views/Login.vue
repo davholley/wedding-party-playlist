@@ -17,6 +17,11 @@
       </div>
       <div class="form-input-group">
         <input class="userbox" type="password" name="password" id="password" v-model="user.password" required />
+    
+      <div class="eye">
+          <button class="eye" type="password" id="password"> <i class="fa-solid fa-eye-slash" @click="togglePasswordVisibility"></i></button>
+          <button class="eye" type="password" id="password"> <i class="fa-solid fa-solid fa-eye" @click="togglePasswordVisibility"></i></button>
+      </div>
       </div>
       <div class="sgnbutton">
       <button class="sgnbutton" type="submit">Sign in</button>
@@ -222,6 +227,12 @@ button{
     border-radius: 12px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
+}
+.eye { 
+    display: inline;
+    margin-left: -13%;
+    border-radius: 6px;
+    line-height: 22px;
 }
 input{
    height: 15px;

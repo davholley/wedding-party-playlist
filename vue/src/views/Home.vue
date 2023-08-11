@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <h1>Welcome Hom{{e}}</h1>
+    <h1><span class="box-outer">Welcome Hom{{e}} </span></h1>
     
-    <form  action="" >
-      <input class="userbox" v-model="playlist.name" type="text" name="playlistName" id="playlistName">
-      <input class="userbox" v-model="playlist.description" type="text" name="playlistDesc" id="playlistDesc">
+    <form action="" >
+      <input class="label" v-model="playlist.name" type="text" name="playlistName" id="playlistName">
+      <input class="label" v-model="playlist.description" type="text" name="playlistDesc" id="playlistDesc">
        <button @click.prevent="createPlaylist">Create Playlist</button>
     </form>
    
@@ -32,7 +32,7 @@ export default {
   data(){
   return {
   e: '\ue00e',
-  playlist: {"name": "New Playlist","description": "New playlist description","public": true},
+  playlist: {"name": "New Playlist","description": "Playlist Description","public": true},
   DatabasePlaylists: {},
   SpotifyPlaylists : [],
   hasSpotify: false
@@ -69,10 +69,6 @@ export default {
           
         }); 
       })
-       
-      
-      
-
     },
     comments:{
       PlayList,
@@ -85,8 +81,6 @@ body{
 background-image: url("../assets/Background1.jpg");
   background-size: 100vw 100vh;  
 
-
-
 }
 </style>
 <style scoped>
@@ -94,11 +88,14 @@ background-image: url("../assets/Background1.jpg");
   margin-bottom: 1rem;
   padding-right: 3%;
   
+  
 }
-label {
-  width:75px;
+.label {
+  width:120px;
   display: inline-block;
-  margin-right: 0.5rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
+
   
 }
 h1{
@@ -106,17 +103,17 @@ h1{
   justify-content: center;
   letter-spacing: 3px;
   font-family: 'JosephSophia';
-  font-size: 90px;
+  font-size: 80px;
   color: #D4a373;
   text-shadow: 4px 4px black ;
   
 }
 button{
-  display: flex;
-  justify-content: center;
-  border-radius: 6px;
-  line-height: 22px;
-  background-color: #fcf7d9;
+  display: inline-block;
+  width:105px;
+  height: 22px;
+  display: inline-block;
+  margin-right: 0.5rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
    font-style: italic;
 }
@@ -135,6 +132,16 @@ button{
   border-radius: 12px;
   font-family: Georgia, 'Times New Roman', Times, serif;
    font-style: italic;
+}
+.box-outer {
+    background-color: rgb(254, 250, 224, .75);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-self: center;
+    border-radius: 12px;
+    width: 500px;
+    height: 100px;
 }
 
 </style>
