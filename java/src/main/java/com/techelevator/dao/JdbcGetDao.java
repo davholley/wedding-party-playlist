@@ -70,7 +70,7 @@ public class JdbcGetDao {
         try {
             SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,id);
             while (rowSet.next()) {
-                users.add(rowSet.getString("username"));
+                users.add(rowSet.getString("username") +" "+ rowSet.getString("user_id"));
 
             }
 
