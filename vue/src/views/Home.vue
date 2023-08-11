@@ -1,14 +1,7 @@
 <template>
   <div class="home">
-    <h1><span class="box-outer">Welcome Home </span></h1>
-    
-    <form action="" >
-      <input class="label" v-model="playlist.name" type="text" name="playlistName" id="playlistName">
-      <input class="label" v-model="playlist.description" type="text" name="playlistDesc" id="playlistDesc">
-       <button @click.prevent="createPlaylist">Create Playlist</button>
-    </form>
-   
-    <play-list v-bind:SpotifyPlaylists="SpotifyPlaylists"></play-list>
+    <h1><span class="box-outer">Welcome Hom{{e}} </span></h1>
+ 
     
     <div class="formfield" id="playlistName">
        <selection-box class="playlistName" v-bind="SpotifyPlaylists" mutation="SET_USER"/>
@@ -110,14 +103,10 @@ export default {
         }
       );
     },
-    searchSpotify(){
-       SpotifyService.findSong(this.spotifyQuery).then((response)=>{
-         this.spotifySearchResults = response.data;
-       });
-    },
+  
     searchSong() {
     this.searchPerformed = true;
-    SpotifyService.searchSong(localStorage.getItem('bearer'), this.searchQuery).then((response) => {
+    SpotifyService.searchSong(localStorage.getItem('spotifyBearer'), this.searchQuery).then((response) => {
       this.searchResults = response.data.tracks.items;
       console.log(this.searchResults);
     });
@@ -246,6 +235,7 @@ button {
   padding: 20px;
   border-radius: 10px; /* Rounded corners */
   margin: 20px;
+  margin-left: 0px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a card effect */
 }
 

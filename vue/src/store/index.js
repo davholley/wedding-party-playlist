@@ -40,7 +40,9 @@ export default new Vuex.Store({
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('bearer');
-     
+      localStorage.removeItem('spotifyId');
+      localStorage.removeItem('tempUserName');
+      localStorage.removeItem('tempPassword');
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
