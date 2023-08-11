@@ -26,10 +26,10 @@
         <!-- Search Box -->
         <div class="search-container">
           <input class="search-box" v-model="searchQuery" type="text" placeholder="Search for a song...">
-          <button @click.prevent="searchSong">Search</button>
-        </div>
+          <button @click.prevent="searchSong">{{ buttonText }}</button>
+          </div>
         <div class="search-results-container">
-        <search-results :results="searchResults" @add-must-have="addMustHaveSong" @add-do-not-play="addDoNotPlaySong" @add-to-playlist="addSongToPlaylist"></search-results>
+        <search-results :results="searchResults" v-if="isDropdownOpen" @add-must-have="addMustHaveSong" @add-do-not-play="addDoNotPlaySong" @add-to-playlist="addSongToPlaylist"></search-results>
         </div>
         <!-- Must-Have Songs Container -->
         <div class="must-have-container song-container" @drop="dropMustHave" @dragover.prevent>
@@ -61,12 +61,11 @@ import SearchResults from '../components/SearchResults.vue';
 
 
 export default {
+  
   components: { 
     PlayList,
     SearchResults, 
   },
-  
-
 
   name: "home",
   
@@ -84,6 +83,9 @@ export default {
   doNotPlaySongs: [], 
   searchResults: [], 
   searchPerformed: false,
+  buttonText: 'Search',
+  isDropdownOpen: false,
+  
 }
   },
   
@@ -106,12 +108,24 @@ export default {
     },
   
     searchSong() {
-    this.searchPerformed = true;
-    SpotifyService.searchSong(localStorage.getItem('spotifyBearer'), this.searchQuery).then((response) => {
+      SpotifyService.searchSong(localStorage.getItem('spotifyBearer'), this.searchQuery).then((response) => {
       this.searchResults = response.data.tracks.items;
-      console.log(this.searchResults);
+      this.isDropdownOpen = !this.isDropdownOpen;
+      this.searchPerformed = this.searchPerformed ? false : true;
+      this.buttonText = this.searchPerformed ? 'Reset' : 'Search';
+      console.log("Before toggle: searchPerformed =", this.searchPerformed);
+      console.log("After toggle: searchPerformed =", this.searchPerformed);
+      console.log("Button text:", this.buttonText);
+
     });
+
   },
+ toggleButtonText() {
+    this.buttonText = this.searchPerformed ? 'Search' : 'Reset';
+  },
+  watch: {
+  searchPerformed: 'toggleButtonText',
+},
 
   addMustHaveSong(song) {
     this.mustHaveSongs.push(song);
@@ -224,31 +238,45 @@ button {
 .home {
   display: flex;
   flex-direction: column;
+  
 }
 
 .main-content {
   display: flex;
+
+  
+  
 }
+form{
+  display: flex;
+  justify-content: center;
+  }
 
 .playlist-section {
-  width: 50%;
+
+  background-color: #f0f0f0 ;
+  padding-top: 20px;
+  padding-right: -100px;
+  margin-left: 50px;
+  border-radius: 10px; /* Rounded corners */
+  flex-grow: 1;
+  justify-items: center;
+
+}
+.playlist-container{
+  display: flex;
+  padding: 20px;
+  justify-content: center;
 }
 
-.playlist-container {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 10px; /* Rounded corners */
-  margin: 20px;
-  margin-left: 0px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a card effect */
-}
 
 .song-containers {
-  width: 75%;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: 'JosephSophia';
+  flex-grow: 1;
 }
 
 .search-container {
@@ -257,7 +285,7 @@ button {
   align-items: center;
   justify-content: center;
   margin: 20px;
-  width: 100%;
+ 
 }
 
 .search-box {
