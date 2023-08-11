@@ -1,5 +1,5 @@
 <template>
-  <div class="search-results">
+  <div  class="search-results">
     <ul v-if="results.length > 0">
       <li v-for="track in results" :key="track.id" draggable="true" @dragstart="dragStart($event, track)" @dragend="dragEnd">
         <div class="card-content">
@@ -46,15 +46,24 @@ export default {
 </script>
 
 <style scoped>
+ul{
+ 
+  flex-grow: 1;
+ padding-left: 0px;
+  
+}
+
 .search-results {
   list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   overflow-y: auto;
   max-height: 400px;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  width: 50%;
 }
 
 .search-results p {
@@ -71,14 +80,16 @@ export default {
 .search-results li {
   display: flex;
   flex-direction: row;
-  margin: 20px;
+  margin : 20px;
+  margin-left: 25px;
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  width: calc(60% - 20px);
+  width: 80%;
   background-color: #f9f9f9;
+  padding-left: 10%;
 }
 
 .card-content {
@@ -108,11 +119,11 @@ button {
 .search-results img {
   width: 60px;
   height: 60px;
-  margin-right: 10px;
+  padding-left: 10px;
 }
 
 .search-results span {
-  font-size: 16px;
+  font-size: 24px;
   color: #333;
 }
 

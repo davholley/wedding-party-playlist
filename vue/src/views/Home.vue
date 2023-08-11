@@ -177,6 +177,7 @@ body {
   background-size: 100vw 100vh;
 }
 
+
 .form-input-group {
   margin-bottom: 1rem;
   padding-right: 3%;
@@ -224,6 +225,12 @@ button {
   font-style: italic;
 }
 
+.search-results-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .box-outer {
   background-color: rgb(254, 250, 224, .75);
   display: flex;
@@ -232,13 +239,13 @@ button {
   align-self: center;
   border-radius: 12px;
   width: 500px;
-  height: 100px;
+  height: 80px;
 }
 
 .home {
   display: flex;
   flex-direction: column;
-  
+  overflow: hidden;
 }
 
 .main-content {
@@ -259,7 +266,7 @@ form{
   padding-right: -100px;
   margin-left: 50px;
   border-radius: 10px; /* Rounded corners */
-  flex-grow: 1;
+  width: 50%;
   justify-items: center;
 
 }
@@ -276,7 +283,7 @@ form{
   flex-direction: column;
   align-items: center;
   font-family: 'JosephSophia';
-  flex-grow: 1;
+  width: 50%;
 }
 
 .search-container {
@@ -285,7 +292,7 @@ form{
   align-items: center;
   justify-content: center;
   margin: 20px;
- 
+  width: 50%;
 }
 
 .search-box {
