@@ -7,16 +7,16 @@
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
-        <input class="userbox" type="text" name="username" id="username" v-model="user.username" required autofocus />
+        <input class="userbox" type="text" placeholder="username" id="username" v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
         <label for="password">Password</label>
-        <input  class="userbox" type="password" name="password"  id="password" v-model="user.password" required />
+        <input  class="userbox" type="password" placeholder="password"  id="password" v-model="user.password" required />
 
       </div>
       <div class="form-input-group">
         <label for="confirmPassword">Confirm Password</label>
-        <input  class="userbox" type="password" name="confirm password" id="confirmPassword" v-model="user.confirmPassword" required />
+        <input  class="userbox" type="password" placeholder="confirm password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
       <div class="sgnbutton">
       <button type="submit">Create Account</button>
