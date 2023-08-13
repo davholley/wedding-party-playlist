@@ -12,15 +12,16 @@
       <div role="alert" v-if="this.$route.query.registration">
         Thank you for registering, please sign in.
       </div>
-      <div  class="form-input-group">
-        <input class="userbox" type="text" name="username"  v-model="user.username" required autofocus />
+      <div class="form-input-group">
+        <input class="userbox" type="text" placeholder="username"  v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <input class="userbox" type="password" name="password" id="password" v-model="user.password" required />
+        <input class="userbox" v-if="isHash" type="text" placeholder="password" id="password" v-model="user.password" required />
+        <input class="userbox" v-else type="password" placeholder="password" id="password" v-model="user.password" required />
     
       <div class="eye">
-          <button class="eye" type="password" id="password"> <i class="fa-solid fa-eye-slash" @click="togglePasswordVisibility"></i></button>
-          <button class="eye" type="password" id="password"> <i class="fa-solid fa-solid fa-eye" @click="togglePasswordVisibility"></i></button>
+          <i class="fa-solid fa-eye-slash" @click="togglePasswordVisibility" :class="{'fa-solid fa-eye' : isHash }"></i>
+          <!-- <button class="eye" type="password" id="password"> <i class="fa-solid fa-eye" @click="togglePasswordVisibility"></i></button> -->
       </div>
       </div>
       <div class="sgnbutton">
@@ -49,8 +50,8 @@ export default {
     return  {
       n: '\ue017',
       user: {
-        username:"username" ,
-        password: "password"
+        username:"" ,
+        password: ""
       },
       invalidCredentials: false,
       client_id : '6d7a9526161e48ba94c6d297e82b6075',
@@ -63,6 +64,12 @@ export default {
     };
   },
   methods: {
+
+    togglePasswordVisibility(){
+      this.isHash = !this.isHash;
+      const input = document.getElementById("password");
+      input.setAttribute("type", this.isHash ? true : false);
+    },
   
     spotify(){
     let state = this.generateRandomString(16);
@@ -149,13 +156,9 @@ export default {
          this.login()
          }
           })
-
-       })
-      
-      
-
+       }) 
   }
-}
+  }
 };
 </script>
 
@@ -230,7 +233,7 @@ button{
 }
 .eye { 
     display: inline;
-    margin-left: -13%;
+    margin-left: -5%;
     border-radius: 6px;
     line-height: 22px;
 }
