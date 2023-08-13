@@ -17,8 +17,11 @@
         </form>
         <div class="playlist-container">
           <play-list v-bind:SpotifyPlaylists="SpotifyPlaylists"></play-list>
-          <playlist-songs></playlist-songs>
+          
           <!-- ... other playlist related elements ... -->
+        </div>
+        <div class="playlist-songs-container">
+          <playlist-songs></playlist-songs>
         </div>
 
       </div>
@@ -157,7 +160,6 @@ export default {
   created(){
       SpotifyService.getBearer()
       DatabaseService.getPlaylists(this.$store.state.user.id).then((response)=>{
-        
         this.DatabasePlaylists = response.data;
         this.DatabasePlaylists.forEach(playlist => {
           let id = playlist.playlistId;
@@ -321,7 +323,10 @@ form{
   
 
 }
-
+.playlist-songs-container{
+  display: flex;
+  justify-content: center;
+}
 .must-have-container ul,
 .do-not-play-container ul {
   list-style-type: none; /* Remove bullets */

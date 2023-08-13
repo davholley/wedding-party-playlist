@@ -22,7 +22,9 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    playlistSongs : {}
+    playlistSongs : {},
+    currentPlaylist : "",
+    currentPlaylistSnapshot :"",
     
 
   },

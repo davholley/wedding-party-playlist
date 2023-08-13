@@ -63,6 +63,13 @@ export default{
     axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
     return response;
   },
+  removeSongFromPlaylist(bearer,playlistId,id,snapshot){
+   axios.defaults.headers.common['Authorization'] = `Bearer ${bearer}`;
+   
+   axios.delete(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {data:{"tracks": [{"uri":id}],"snapshot_id": snapshot}})
+   axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
+
+  }
    
 
 }

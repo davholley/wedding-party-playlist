@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import SpotifyService from '../services/SpotifyService'
+
 
 export default {
   name: "home",
@@ -29,13 +29,20 @@ export default {
 methods:{
   updateSelectionChoice(){
     if(this.playlist != ""){
-    SpotifyService.getPlaylist(this.playlist).then((response)=>{
-      if (response.status == 200){this.$store.state.playlistSongs = response.data.tracks.items;}
-    }).catch(()=>{
-      console.log("Something Went Wrong");
-    })
+    for (let key in this.SpotifyPlaylists) {
+      if (this.playlist == this.SpotifyPlaylists[key].id){
+        this.$store.state.playlistSongs = this.SpotifyPlaylists[key].tracks.items;
+        this.$store.state.currentPlaylist = this.SpotifyPlaylists[key].id;
+        this.$store.state.currentPlaylistSnapshot = this.SpotifyPlaylists[key].snapshot_id;
+        
+      }
     }
-    else{this.$store.state.playlistSongs = {}}
+    }
+    else{
+      this.$store.state.playlistSongs = {};
+      this.$store.state.currentPlaylist = "";
+      this.$store.state.currentPlaylistSnapshot = "";
+    }
   }
 }
 }

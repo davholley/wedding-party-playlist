@@ -64,6 +64,8 @@ ul{
   scrollbar-width: none;
   -ms-overflow-style: none;
   width: 50%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
 }
 
 .search-results p {
