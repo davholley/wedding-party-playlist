@@ -11,8 +11,8 @@
       <!-- Left Side: Playlist Creation and Container -->
       <div class="playlist-section">
         <form action="">
-          <input class="label" v-model="playlist.name" type="text" name="playlistName" id="playlistName">
-          <input class="label" v-model="playlist.description" type="text" name="playlistDesc" id="playlistDesc">
+          <input class="label" v-model="playlist.name" type="text" placeholder="New Playlist" id="playlistName">
+          <input class="label" v-model="playlist.description" type="text" placeholder="Playlist Description" id="playlistDesc">
           <button @click.prevent="createPlaylist">Create Playlist</button>
         </form>
         <div class="playlist-container">
@@ -72,7 +72,7 @@ export default {
   data(){
   return {
   e: '\ue00e',
-  playlist: {"name": "New Playlist","description": "Playlist Description","public": true},
+  playlist: {"public": true},
   DatabasePlaylists: {},
   SpotifyPlaylists : [],
   hasSpotify: false,

@@ -37,9 +37,9 @@ export default {
       e: '\ue00e',
       t: '\ue01d',
       user: {
-        username: 'username',
-        password: 'password',
-        confirmPassword: 'confirm password',
+        username: '',
+        password: '',
+        confirmPassword: '',
         role: 'user',
       },
       registrationErrors: false,
