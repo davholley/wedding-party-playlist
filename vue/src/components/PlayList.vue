@@ -2,22 +2,19 @@
    <div class="formfield" id="playlistName"> 
     <label for="playList">{{ labelText }}</label>
     <select id="playlistName" name="PlaylistName" class="formfield selectbox"
-      @change="updateSelectionChoice" v-model="playlist.name">
+        @change="updateSelectionChoice" v-model="playlist">
       <option value="">--- Please Select a Playlist ---</option>
-      <option v-for="playlist in SpotifyPlaylists" v-bind:key="playlist.id">
+      <option v-for="playlist in SpotifyPlaylists" v-bind:key="playlist.id" v-bind:value="playlist.id">
     {{playlist.name}}
     </option>
     </select>
+
   
-  <!-- <div class="playlists">
-    <section v-for="playlist in SpotifyPlaylists" v-bind:key="playlist.id">
-    <h1 >{{playlist.name}}</h1>
-    <h2>{{playlist.description == ""? "No Description": playlist.description}}</h2>
-    </section>
-  </div> -->
+  
   </div>
 </template>
 <script>
+import SpotifyService from '../services/SpotifyService'
 
 export default {
   name: "home",
@@ -25,8 +22,22 @@ export default {
   data(){
   return{
     playlist: "",
+   
   }
   }
+,
+methods:{
+  updateSelectionChoice(){
+    if(this.playlist != ""){
+    SpotifyService.getPlaylist(this.playlist).then((response)=>{
+      if (response.status == 200){this.$store.state.playlistSongs = response.data.tracks.items;}
+    }).catch(()=>{
+      console.log("Something Went Wrong");
+    })
+    }
+    else{this.$store.state.playlistSongs = {}}
+  }
+}
 }
 </script>
 <style scoped>

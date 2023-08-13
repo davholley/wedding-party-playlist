@@ -17,8 +17,10 @@
         </form>
         <div class="playlist-container">
           <play-list v-bind:SpotifyPlaylists="SpotifyPlaylists"></play-list>
+          <playlist-songs></playlist-songs>
           <!-- ... other playlist related elements ... -->
         </div>
+
       </div>
 
       <!-- Right Side: Song Search, Must-Have, and Do Not Play Containers -->
@@ -58,13 +60,15 @@ import DatabaseService from '../services/DatabaseService';
 
 import PlayList from '../components/PlayList.vue';
 import SearchResults from '../components/SearchResults.vue';
+import PlaylistSongs from '../components/PlaylistSongs.vue';
 
 
 export default {
   
   components: { 
     PlayList,
-    SearchResults, 
+    SearchResults,
+    PlaylistSongs, 
   },
 
   name: "home",
@@ -301,6 +305,10 @@ form{
   border-radius: 5px;
   font-size: 16px;
   
+}
+.playlist-container{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .song-container {
