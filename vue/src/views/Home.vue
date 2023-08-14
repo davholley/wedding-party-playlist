@@ -16,7 +16,7 @@
           <button @click.prevent="createPlaylist">Create Playlist</button>
         <button class="addUser" @click="selectUsers = !selectUsers"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
         </form>
-        <add-user></add-user>
+        <!-- <add-user></add-user> -->
         
         <div class="playlist-container">
           <play-list v-bind:Playlists="DatabasePlaylists"></play-list>
@@ -67,7 +67,7 @@ import DatabaseService from '../services/DatabaseService';
 
 import PlayList from '../components/PlayList.vue';
 import SearchResults from '../components/SearchResults.vue';
-import AddUser from "../components/AddUser.vue";
+// import AddUser from "../components/AddUser.vue";
 
 
 
@@ -79,7 +79,7 @@ export default {
   components: { 
     PlayList,
     SearchResults,
-    AddUser
+    // AddUser
     
     
      

@@ -8,7 +8,7 @@
     <span>{{song.track.name}} - {{song.track.artists[0].name}}
       
     </span>
-    <button @click="removeSong(song.track.uri, song.track.id)"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
+    <button v-show="PlaylistOwner == $store.state.user.id" @click="removeSong(song.track.uri, song.track.id)"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
   </div>
   
  </div>
@@ -25,7 +25,7 @@ import SpotifyService from '../services/SpotifyService'
 
 export default {
   name: "PlaylistSongs",
-  props: ["Playlist"],
+  props: ["Playlist", "PlaylistOwner"],
   data(){
    return {
      milk: "milk",

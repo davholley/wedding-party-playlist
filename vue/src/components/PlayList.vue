@@ -5,7 +5,7 @@
     <select id="playlistName" name="PlaylistName" class="formfield selectbox"
         @change="updateSelectionChoice" v-model="playlist">
       <option value="">--- Please Select a Playlist ---</option>
-      <option v-for="playlist in Playlists" v-bind:key="playlist.playlistId" v-bind:value="playlist.playlistId">
+      <option v-for="playlist in Playlists" v-bind:key="playlist.playlistId" v-bind:value="playlist">
     {{playlist.playlistName}}
     </option>
     </select>
@@ -14,7 +14,7 @@
    
     
     <div>
-      <playlist-songs v-bind:Playlist="currentPlaylist" v-if="currentPlaylist" ></playlist-songs>
+      <playlist-songs v-bind:Playlist="currentPlaylist" v-bind:PlaylistOwner="currentPlaylistOwner" v-if="currentPlaylist" ></playlist-songs>
     </div>
     
       
@@ -32,8 +32,9 @@ export default {
   props: ["Playlists"],
   data(){
   return{
-    playlist: "",
+    playlist: {},
     currentPlaylist: null,
+    currentPlaylistOwner: null,
     
 
    
@@ -42,15 +43,17 @@ export default {
 ,
 methods:{
   updateSelectionChoice(){
-    if(this.playlist != ""){
-        SpotifyService.getPlaylist(this.playlist).then((response)=>{
+    if(this.playlist.playlistId != ""){
+        this.currentPlaylistOwner = this.playlist.dj_id
+        SpotifyService.getPlaylist(this.playlist.playlistId).then((response)=>{
+          
             this.currentPlaylist =response.data;
             this.$store.state.currentPlaylist = this.currentPlaylist.id;
         })
       
     }
     else{
-    
+      this.currentPlaylistOwner = null;
       this.currentPlaylist = null;
       this.$store.state.currentPlaylist = "";
     }
