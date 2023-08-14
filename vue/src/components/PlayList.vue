@@ -45,6 +45,9 @@ export default {
 methods:{
   updateSelectionChoice(){
     if(this.playlist != ""){
+       this.$store.state.mustHaveSongs = []
+      this.$store.state.doNotPlaySongs = []
+
         this.currentPlaylistOwner = this.playlist.dj_id
         SpotifyService.getPlaylist(this.playlist.playlistId).then((response)=>{
           
@@ -53,13 +56,16 @@ methods:{
         })
         DatabaseService.getPlaylistSongs(this.playlist.playlistId).then((response)=>{
           let songs = response.data;
-          let mustHaveSongs = [];
+          
           for (let song in songs) {
             if(songs[song].mustPlay){
-              mustHaveSongs.push(songs[song])
+              this.$store.state.mustHaveSongs.push(songs[song])
+            }
+            if(songs[song].doNotPlay){
+              this.$store.state.doNotPlaySongs.push(songs[song])
             }
           }
-          this.$store.state.mustHaveSongs = mustHaveSongs
+           
         })
         
       
@@ -69,6 +75,7 @@ methods:{
       this.currentPlaylist = null;
       this.$store.state.currentPlaylist = "";
       this.$store.state.mustHaveSongs = []
+      this.$store.state.doNotPlaySongs = []
 
     }
   },
@@ -99,7 +106,7 @@ option{
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 1rem;
-    height: 400px;
+    height: 600px;
     width: 80%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;

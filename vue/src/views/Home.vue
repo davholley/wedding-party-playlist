@@ -44,7 +44,11 @@
         <div class="must-have-container song-container" @drop="dropMustHave" @dragover.prevent>
           <h2>Must-Have Songs</h2>
           <ul>
-            <li v-for="song in  $store.state.mustHaveSongs" :key="song.songId">{{ song.title }}</li>
+            <li v-for="song in  $store.state.mustHaveSongs" :key="song.songId"> 
+              <img v-bind:src="song.imageUrl" alt="">
+              {{ song.title}}
+              
+              </li>
           </ul>
         </div>
 
@@ -52,7 +56,11 @@
         <div class="do-not-play-container song-container" @drop="dropDoNotPlay" @dragover.prevent>
           <h2>Do Not Play Songs</h2>
           <ul>
-            <li v-for="song in doNotPlaySongs" :key="song.id">{{ song.name }}</li>
+            <li v-for="song in $store.state.doNotPlaySongs" :key="song.songId">
+              <img v-bind:src="song.imageUrl" alt="">
+              {{ song.title}}
+              
+              </li>
           </ul>
         </div>
       </div>
@@ -149,25 +157,41 @@ export default {
 },
 
   addMustHaveSong(song) {
-    this.mustHaveSongs.push(song);
+    this.$store.state.mustHaveSongs.push(song);
   },
 
   addDoNotPlaySong(song) {
-    this.doNotPlaySongs.push(song);
+    this.$store.state.doNotPlaySongs.push(song);
   },
   dropMustHave(event) {
     // Get the track data from the dataTransfer object
     const track = JSON.parse(event.dataTransfer.getData('text/plain'));
+    let song = { "playlistId": this.$store.state.currentPlaylist,
+    "songId": track.id,
+    "title": track.name,
+    "imageUrl": track.album.images[0].url,
+    "artist": track.artists[0].name,
+    "mustPlay":true
 
+    }
+  DatabaseService.addSongToPlaylist(song);
     // Add the track to the mustHaveSongs array
-    this.mustHaveSongs.push(track);
+    this.$store.state.mustHaveSongs.push(song);
   },
   dropDoNotPlay(event) {
     // Get the track data from the dataTransfer object
     const track = JSON.parse(event.dataTransfer.getData('text/plain'));
+    let song = { "playlistId": this.$store.state.currentPlaylist,
+    "songId": track.id,
+    "title": track.name,
+    "imageUrl": track.album.images[0].url,
+    "artist": track.artists[0].name,
+    "doNotPlay":true
 
+    }
+    DatabaseService.addSongToPlaylist(song);
     // Add the track to the mustHaveSongs array
-    this.doNotPlaySongs.push(track);
+    this.$store.state.doNotPlaySongs.push(song);
   },
   addUser(){
 
@@ -358,10 +382,17 @@ form{
   justify-content: center;
 }
 .must-have-container, .do-not-play-container{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
   border: black inset;
   border-radius: 12px;
 }
-
+.must-have-container img,
+.do-not-play-container img {
+  padding-right: 5px;
+  width: 60px;
+  height: 60px; /* Remove padding */
+}
 .must-have-container ul,
 .do-not-play-container ul {
   list-style-type: none; /* Remove bullets */
@@ -370,6 +401,8 @@ form{
 
 .must-have-container li,
 .do-not-play-container li {
+  display: flex;
+  align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ccc; /* Add a line between songs */
 }

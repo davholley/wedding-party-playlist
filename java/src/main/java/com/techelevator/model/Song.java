@@ -16,7 +16,8 @@ public class Song {
 
     @NotNull
     private String artist;
-
+    private boolean mustPlay = false;
+    private boolean doNotPlay = false;
     public String getArtist() {
         return artist;
     }
@@ -25,8 +26,7 @@ public class Song {
         this.artist = artist;
     }
 
-    private boolean mustPlay = false;
-    private boolean doNotPlay = false;
+
 
     public String getTitle() {
         return title;
