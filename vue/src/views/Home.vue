@@ -293,12 +293,16 @@ form{
   border-radius: 10px; /* Rounded corners */
   width: 50%;
   justify-items: center;
+  border-radius: 12px;
+  border: inset black;
 
 }
 .playlist-container{
   display: flex;;
   padding: 20px;
   justify-content: center;
+  
+  border-radius: 12px;
 }
 
 
@@ -309,6 +313,7 @@ form{
   align-items: center;
   font-family: 'JosephSophia';
   width: 50%;
+  
 }
 
 .search-container {
@@ -325,7 +330,8 @@ form{
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
-  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
 }
 .playlist-container{
   height: 100%;
@@ -343,10 +349,16 @@ form{
   
 
 }
+
 .playlist-songs-container{
   display: flex;
   justify-content: center;
 }
+.must-have-container, .do-not-play-container{
+  border: black inset;
+  border-radius: 12px;
+}
+
 .must-have-container ul,
 .do-not-play-container ul {
   list-style-type: none; /* Remove bullets */
