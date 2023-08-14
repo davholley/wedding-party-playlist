@@ -32,7 +32,7 @@ public class GetController {
     }
 
     @GetMapping("/playlist/{id}/songs")
-    @ResponseStatus(HttpStatus.FOUND )
+    @ResponseStatus(HttpStatus.ACCEPTED )
     public List<Song> getPlaylistSongs(@PathVariable String id){
         try{
             return  jdbcGetDao.getPlaylistSongs(id);
@@ -42,7 +42,7 @@ public class GetController {
     }
 
     @GetMapping("/{id}/others")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List<String> getOtherUsers(@PathVariable int id){
         try {
             return jdbcGetDao.getOtherUsers(id);

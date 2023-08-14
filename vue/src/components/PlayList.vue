@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import DatabaseService from '../services/DatabaseService';
 import SpotifyService from '../services/SpotifyService';
 import PlaylistSongs from './PlaylistSongs.vue';
 
@@ -43,19 +44,32 @@ export default {
 ,
 methods:{
   updateSelectionChoice(){
-    if(this.playlist.playlistId != ""){
+    if(this.playlist != ""){
         this.currentPlaylistOwner = this.playlist.dj_id
         SpotifyService.getPlaylist(this.playlist.playlistId).then((response)=>{
           
             this.currentPlaylist =response.data;
             this.$store.state.currentPlaylist = this.currentPlaylist.id;
         })
+        DatabaseService.getPlaylistSongs(this.playlist.playlistId).then((response)=>{
+          let songs = response.data;
+          let mustHaveSongs = [];
+          for (let song in songs) {
+            if(songs[song].mustPlay){
+              mustHaveSongs.push(songs[song])
+            }
+          }
+          this.$store.state.mustHaveSongs = mustHaveSongs
+        })
+        
       
     }
     else{
       this.currentPlaylistOwner = null;
       this.currentPlaylist = null;
       this.$store.state.currentPlaylist = "";
+      this.$store.state.mustHaveSongs = []
+
     }
   },
   

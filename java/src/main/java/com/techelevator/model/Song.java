@@ -6,31 +6,16 @@ public class Song {
     @NotNull
     private String songId;
     @NotNull
+    private String playlistId;
+
+    @NotNull
     private String title;
+
+    @NotNull
+    private String imageUrl;
+
     @NotNull
     private String artist;
-    @NotNull
-    private String album;
-    @NotNull
-    private String playlistId;
-    private boolean mustPlay = false;
-    private boolean doNotPlay = false;
-
-    public String getSongId() {
-        return songId;
-    }
-
-    public void setSongId(String songId) {
-        this.songId = songId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getArtist() {
         return artist;
@@ -40,13 +25,36 @@ public class Song {
         this.artist = artist;
     }
 
-    public String getAlbum() {
-        return album;
+    private boolean mustPlay = false;
+    private boolean doNotPlay = false;
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setAlbum(String album) {
-        this.album = album;
+    public void setTitle(String title) {
+        this.title = title;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+
+
+    public String getSongId() {
+        return songId;
+    }
+
+    public void setSongId(String songId) {
+        this.songId = songId;
+    }
+
+
 
     public String getPlaylistId() {
         return playlistId;

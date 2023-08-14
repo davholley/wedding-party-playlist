@@ -19,7 +19,7 @@
         <!-- <add-user></add-user> -->
         
         <div class="playlist-container">
-          <play-list v-bind:Playlists="DatabasePlaylists"></play-list>
+          <play-list @change="log" v-bind:Playlists="DatabasePlaylists"></play-list>
           
           <!-- ... other playlist related elements ... -->
         </div>
@@ -44,7 +44,7 @@
         <div class="must-have-container song-container" @drop="dropMustHave" @dragover.prevent>
           <h2>Must-Have Songs</h2>
           <ul>
-            <li v-for="song in mustHaveSongs" :key="song.id">{{ song.name }}</li>
+            <li v-for="song in  $store.state.mustHaveSongs" :key="song.songId">{{ song.title }}</li>
           </ul>
         </div>
 
@@ -123,6 +123,9 @@ export default {
 
         }
       );
+    },
+    log(){
+      console.log("changed")
     },
   
     searchSong() {

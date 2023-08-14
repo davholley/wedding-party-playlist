@@ -29,9 +29,9 @@ public class JdbcPostDao {
     }
 
     public void addSong(Song song) throws DaoException {
-        String sql = "Insert into songs (song_id, title, artist, album, playlist_id, must_play, do_not_play) values (?,?,?,?,?,?,?);";
+        String sql = "Insert into songs (song_id,playlist_id,title, artist,imageUrl,must_play,do_not_play) values (?,?,?,?,?,?,?);";
         try {
-            jdbcTemplate.update(sql,song.getSongId(), song.getTitle(), song.getArtist(), song.getAlbum(), song.getPlaylistId(), song.isMustPlay(), song.isDoNotPlay());
+            jdbcTemplate.update(sql,song.getSongId(), song.getPlaylistId(), song.getTitle(), song.getArtist(), song.getImageUrl(), song.isMustPlay(), song.isDoNotPlay());
 
         }  catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -39,7 +39,7 @@ public class JdbcPostDao {
             throw new DaoException("Data integrity violation", e);
         }
     }
-    public void denySong(String playlistId, String id) throws DaoException {
+    public void removeSong(String playlistId, String id) throws DaoException {
         String sql = "delete from songs where playlist_id = ? AND song_id = ?;";
         try {
             jdbcTemplate.update(sql,playlistId,id);

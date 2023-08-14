@@ -87,10 +87,10 @@ public class JdbcGetDao {
     public Song mapRowToSong(SqlRowSet rowSet) {
         Song song = new Song();
         song.setSongId(rowSet.getString("song_id"));
-        song.setAlbum(rowSet.getString("album"));
-        song.setArtist(rowSet.getString("artist"));
-        song.setTitle(rowSet.getString("title"));
         song.setPlaylistId(rowSet.getString("playlist_id"));
+        song.setTitle(rowSet.getString("title"));
+        song.setArtist(rowSet.getString("artist"));
+        song.setImageUrl(rowSet.getString("imageUrl"));
         song.setMustPlay(rowSet.getBoolean("must_play"));
         song.setDoNotPlay(rowSet.getBoolean("do_not_play"));
         return song;

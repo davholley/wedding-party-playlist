@@ -21,10 +21,10 @@ CREATE TABLE playlists(
 );
 CREATE TABLE songs(
 	song_id  VARCHAR(255) PRIMARY KEY,
+	playlist_id  VARCHAR(255),
 	title VARCHAR(255),
 	artist VARCHAR(255),
-	album VARCHAR(255),
-	playlist_id  VARCHAR(255),
+	imageUrl VARCHAR(255),
 	must_play boolean,
 	do_not_play boolean,
 	CONSTRAINT FK_playlist_id FOREIGN KEY(playlist_id) REFERENCES playlists(playlist_id)

@@ -52,10 +52,10 @@ public class PostController {
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PostMapping("/playlist/{id}/deny")
-    public void denySong(@PathVariable String id, @Valid @RequestBody String SongID){
+    @PostMapping("/playlist/{id}/remove")
+    public void removeSong(@PathVariable String id, @Valid @RequestBody String SongID){
         try{
-            jdbcPostDao.denySong(id,SongID);
+            jdbcPostDao.removeSong(id,SongID);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
