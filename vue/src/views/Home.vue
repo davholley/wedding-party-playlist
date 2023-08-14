@@ -3,10 +3,10 @@
     <h1><span class="box-outer">Welcome Hom{{e}} </span></h1>
  
     
-    <div class="formfield" id="playlistName">
+    <!-- <div class="formfield" id="playlistName">
        <selection-box class="playlistName" v-bind="SpotifyPlaylists" mutation="SET_USER"/>
     </div>
-   
+    -->
     <div class="main-content">
       <!-- Left Side: Playlist Creation and Container -->
       <div class="playlist-section">
@@ -14,17 +14,21 @@
           <input class="label" v-model="playlist.name" type="text" placeholder="New Playlist" id="playlistName">
           <input class="label" v-model="playlist.description" type="text" placeholder="Playlist Description" id="playlistDesc">
           <button @click.prevent="createPlaylist">Create Playlist</button>
+        <button class="addUser" @click="selectUsers = !selectUsers"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
         </form>
+        <add-user></add-user>
+        
         <div class="playlist-container">
-          <play-list v-bind:SpotifyPlaylists="SpotifyPlaylists"></play-list>
+          <play-list v-bind:Playlists="DatabasePlaylists"></play-list>
           
           <!-- ... other playlist related elements ... -->
         </div>
-        <div class="playlist-songs-container">
-          <playlist-songs></playlist-songs>
-        </div>
 
+        
+  
       </div>
+      
+      
 
       <!-- Right Side: Song Search, Must-Have, and Do Not Play Containers -->
       <div class="song-containers">
@@ -63,7 +67,11 @@ import DatabaseService from '../services/DatabaseService';
 
 import PlayList from '../components/PlayList.vue';
 import SearchResults from '../components/SearchResults.vue';
-import PlaylistSongs from '../components/PlaylistSongs.vue';
+import AddUser from "../components/AddUser.vue";
+
+
+
+
 
 
 export default {
@@ -71,7 +79,10 @@ export default {
   components: { 
     PlayList,
     SearchResults,
-    PlaylistSongs, 
+    AddUser
+    
+    
+     
   },
 
   name: "home",
@@ -81,7 +92,6 @@ export default {
   e: '\ue00e',
   playlist: {"public": true},
   DatabasePlaylists: {},
-  SpotifyPlaylists : [],
   hasSpotify: false,
   spotifySearchResults : {},
   spotifyQuery : "",
@@ -92,6 +102,7 @@ export default {
   searchPerformed: false,
   buttonText: 'Search',
   isDropdownOpen: false,
+  selectUsers: false,
   
 }
   },
@@ -155,17 +166,17 @@ export default {
     // Add the track to the mustHaveSongs array
     this.doNotPlaySongs.push(track);
   },
+  addUser(){
+
+  }
     
   },
   created(){
       SpotifyService.getBearer()
       DatabaseService.getPlaylists(this.$store.state.user.id).then((response)=>{
         this.DatabasePlaylists = response.data;
-        this.DatabasePlaylists.forEach(playlist => {
-          let id = playlist.playlistId;
-          SpotifyService.getPlaylist(id).then((result)=>{this.SpotifyPlaylists.push(result.data)});
-          
-        }); 
+        
+         
       })
     },
     comments:{
@@ -220,6 +231,13 @@ button {
   justify-content: center;
   align-content: center;
   margin: 3px;
+}
+.addUser{
+  
+  width: 45px;
+}
+.addUser svg {
+  margin-top: -5px;
 }
 
 .userbox {
@@ -277,7 +295,7 @@ form{
 
 }
 .playlist-container{
-  display: flex;
+  display: flex;;
   padding: 20px;
   justify-content: center;
 }

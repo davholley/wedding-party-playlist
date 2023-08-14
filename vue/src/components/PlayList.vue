@@ -1,27 +1,41 @@
 <template>
    <div class="formfield" id="playlistName"> 
-    <label for="playList">{{ labelText }}</label>
+    <div class="selectDiv">
+      <label for="playList"></label>
     <select id="playlistName" name="PlaylistName" class="formfield selectbox"
         @change="updateSelectionChoice" v-model="playlist">
       <option value="">--- Please Select a Playlist ---</option>
-      <option v-for="playlist in SpotifyPlaylists" v-bind:key="playlist.id" v-bind:value="playlist.id">
-    {{playlist.name}}
+      <option v-for="playlist in Playlists" v-bind:key="playlist.playlistId" v-bind:value="playlist.playlistId">
+    {{playlist.playlistName}}
     </option>
     </select>
-
-  
-  
+    </div>
+    <br>
+   
+    
+    <div>
+      <playlist-songs v-bind:Playlist="currentPlaylist" v-if="currentPlaylist" ></playlist-songs>
+    </div>
+    
+      
+    
   </div>
 </template>
 <script>
+import SpotifyService from '../services/SpotifyService';
+import PlaylistSongs from './PlaylistSongs.vue';
 
 
 export default {
-  name: "home",
-  props: ["SpotifyPlaylists"],
+  components: { PlaylistSongs },
+  name: "Playlist",
+  props: ["Playlists"],
   data(){
   return{
     playlist: "",
+    currentPlaylist: null,
+    
+
    
   }
   }
@@ -29,21 +43,19 @@ export default {
 methods:{
   updateSelectionChoice(){
     if(this.playlist != ""){
-    for (let key in this.SpotifyPlaylists) {
-      if (this.playlist == this.SpotifyPlaylists[key].id){
-        this.$store.state.playlistSongs = this.SpotifyPlaylists[key].tracks.items;
-        this.$store.state.currentPlaylist = this.SpotifyPlaylists[key].id;
-        this.$store.state.currentPlaylistSnapshot = this.SpotifyPlaylists[key].snapshot_id;
-        
-      }
-    }
+        SpotifyService.getPlaylist(this.playlist).then((response)=>{
+            this.currentPlaylist =response.data;
+            this.$store.state.currentPlaylist = this.currentPlaylist.id;
+        })
+      
     }
     else{
-      this.$store.state.playlistSongs = {};
+    
+      this.currentPlaylist = null;
       this.$store.state.currentPlaylist = "";
-      this.$store.state.currentPlaylistSnapshot = "";
     }
-  }
+  },
+  
 }
 }
 </script>
@@ -68,14 +80,26 @@ option{
 
 .formfield {
     display: flex;
-    background-color: #FEFAE0;
+    flex-wrap: wrap;
     margin-bottom: 1rem;
     height: 40px;
-    width: 280px;
+    width: 80%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
-    justify-content: left;
+    justify-content: center;
     align-items: left;
+    
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+.selectDiv{
+  display: flex;
+  flex-basis: 100%;
+  
+  justify-content: center;
+  width: 280px;
 }
 
 </style>

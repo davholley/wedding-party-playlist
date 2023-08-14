@@ -15,6 +15,9 @@ export default {
     },
     addSongToPlaylist(Song){
       return axios.post('/song/add', Song);
+    },
+    getOtherUsers(id){
+      return axios.get(`/${id}/others`);
     }
   
   }

@@ -1,17 +1,20 @@
 <template>
-<div >
-  <div v-for="song in this.$store.state.playlistSongs" v-bind:key="song.track.id" class="song-card">
+<div class="playlist-songs">
+  
+    
+    <div v-for="song in songs" v-bind:key="song.track.id" class="song-card" v-bind:id="song.track.id">
     
     <img :src="song.track.album.images[0].url" alt="Album Cover" />
     <span>{{song.track.name}} - {{song.track.artists[0].name}}
       
     </span>
-    <button @click="removeSong(song.track.uri,song)"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
-    
-    </div>
-    
-    
-    </div>
+    <button @click="removeSong(song.track.uri, song.track.id)"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
+  </div>
+  
+ </div>
+  
+  
+
   
 </template>
 
@@ -19,20 +22,33 @@
 import SpotifyService from '../services/SpotifyService'
 
 
+
 export default {
+  name: "PlaylistSongs",
+  props: ["Playlist"],
   data(){
    return {
-    
+     milk: "milk",
+     
   }  
   },
+  computed:{
+    songs(){
+      return this.Playlist.tracks.items
+    }
+  },
+  
   
   methods:{
-    removeSong(id,song){
+    removeSong(songId, id){
+      SpotifyService.removeSongFromPlaylist(localStorage.getItem("bearer"), this.Playlist.id,songId,this.Playlist.snapshot_id)
       
-      SpotifyService.removeSongFromPlaylist(localStorage.getItem("bearer"), this.$store.state.currentPlaylist,id,this.$store.state.currentPlaylistSnapshot )
-      this.$store.state.playlistSongs.delete(song)
-
+        document.getElementById(id).style.display = "none";
+      
+      
+      
     }
+    
   }
 
 }
@@ -65,6 +81,12 @@ export default {
 button{
   border: none;
   
+}
+.playlist-songs{
+  overflow-y: scroll;
+}
+.playlist-songs::-webkit-scrollbar {
+  display: none;
 }
 
 
