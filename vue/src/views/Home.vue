@@ -234,8 +234,8 @@ button {
   margin: 3px;
 }
 .addUser{
-  
-  width: 45px;
+  border: 0;
+   width: 45px;
 }
 .addUser svg {
   margin-top: -5px;

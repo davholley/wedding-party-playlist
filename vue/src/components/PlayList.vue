@@ -32,7 +32,7 @@ export default {
   props: ["Playlists"],
   data(){
   return{
-    playlist: {},
+    playlist: "",
     currentPlaylist: null,
     currentPlaylistOwner: null,
     
