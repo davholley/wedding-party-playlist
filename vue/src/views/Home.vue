@@ -217,6 +217,7 @@ h1 {
   text-shadow: 4px 4px black;
 }
 
+
 button {
   display: inline-block;
   width: 105px;
@@ -327,6 +328,7 @@ form{
   
 }
 .playlist-container{
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
 }
