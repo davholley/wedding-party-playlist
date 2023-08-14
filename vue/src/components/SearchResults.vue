@@ -84,7 +84,7 @@ ul{
   flex-direction: row;
   margin : 20px;
   margin-left: 25px;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
