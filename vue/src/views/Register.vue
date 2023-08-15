@@ -1,7 +1,9 @@
 <template>
+<div>
+   <div class="box-outer"><h1>Creat{{e}}accoun{{t}}</h1></div>
   <div id="register" class="text-center">
     <form @submit.prevent="register">
-      <h1>Creat{{e}}accoun{{t}}</h1>
+      
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -22,6 +24,7 @@
       
     </form>
   </div>
+</div>
 </template>
 
 <script>
@@ -83,9 +86,9 @@ export default {
     background-size: 100vw 100vh;  
   justify-content: center;
     align-self: center;
-    
-
-
+  }
+  form{
+    padding-top: 3%;
   }
   .form-input-group {
     margin-bottom: 1rem;
@@ -105,15 +108,22 @@ export default {
   
 }
 h1{
-  display: flex;
-  justify-content: center;
-  letter-spacing: 3px;
-  font-family: 'JosephSophia';
-  font-size: 90px;
-  color: #d1985e;
-  text-shadow: 4px 4px rgb(10, 9, 9) ;
-  
+    letter-spacing: 1px;
+    font-family: 'JosephSophia';
+    font-size: 90px;
+    color: #d1985e;
+    text-shadow: 4px 4px rgb(10, 9, 9) ;
 }
+.box-outer {
+    background-color: rgb(254, 250, 224, .75);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-self: center;
+    border-radius: 12px;
+    margin-top: 10px;
+
+} 
 button{
   display: flex;
   justify-content: center;

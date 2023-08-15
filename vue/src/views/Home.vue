@@ -1,6 +1,8 @@
 <template>
+<div>
+ <div class="box-outer"> <h1>Welcome Hom{{e}} </h1> </div>
   <div class="home">
-    <h1><span class="box-outer">Welcome Hom{{e}} </span></h1>
+    
  
     
     <!-- <div class="formfield" id="playlistName">
@@ -28,7 +30,7 @@
   
       </div>
       
-      
+    
 
       <!-- Right Side: Song Search, Must-Have, and Do Not Play Containers -->
       <div class="song-containers">
@@ -67,7 +69,7 @@
       </div>
     </div>
   </div>
-  
+  </div>
 </template>
 
 <script>
@@ -262,15 +264,23 @@ body {
   font-style: italic;
 }
 
-h1 {
-  display: flex;
-  justify-content: center;
-  letter-spacing: 3px;
-  font-family: 'JosephSophia';
-  font-size: 80px;
-  color: #D4a373;
-  text-shadow: 4px 4px black;
+h1{
+    letter-spacing: 1px;
+    font-family: 'JosephSophia';
+    font-size: 90px;
+    color: #d1985e;
+    text-shadow: 4px 4px rgb(10, 9, 9) ;
 }
+.box-outer {
+    background-color: rgb(254, 250, 224, .75);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-self: center;
+    border-radius: 12px;
+    margin-top: 10px;
+
+} 
 
 
 button {
@@ -311,21 +321,13 @@ button {
   width: 100%;
 }
 
-.box-outer {
-  background-color: rgb(254, 250, 224, .75);
-  display: flex;
-  justify-content: center;
-  position: relative;
-  align-self: center;
-  border-radius: 12px;
-  width: 500px;
-  height: 80px;
-}
+
 
 .home {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding-top: 3%;
 }
 
 .main-content {
@@ -360,7 +362,6 @@ form{
   border-radius: 12px;
   flex-wrap: wrap;
 }
-
 
 .song-containers {
   

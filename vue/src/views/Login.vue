@@ -1,10 +1,13 @@
 <template>
-
+<div>
+ <div class="box-outer"> <h1>Please Sign I{{n}} </h1> </div>
   <div id="login">
+
+    
     
       <form @submit.prevent="login" v-show="!isHash">
         
-      <h1><span class="box-outer"> Please Sign I{{n}} </span></h1>
+     
      
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
@@ -35,7 +38,7 @@
     </form>
     
 </div>
-
+</div>
 </template>
 
 <script>
@@ -176,7 +179,7 @@ export default {
   #login{
     display: flex;
     justify-content: center;
-    padding-top: 15% ;
+    padding-top: 3% ;
   }
   .form-input-group {
     display: flex;
@@ -205,10 +208,10 @@ h1{
     position: relative;
     align-self: center;
     border-radius: 12px;
-    width: 500px;
-    height: 100px;
-}
-button{
+    margin-top: 10px;
+
+} 
+   button{
     display: flex;
     justify-content: center;
     border-radius: 6px;
@@ -233,7 +236,7 @@ button{
 }
 .eye { 
     display: inline;
-    margin-left: -5%;
+    margin-left: -7%;
     border-radius: 6px;
     line-height: 22px;
 }
