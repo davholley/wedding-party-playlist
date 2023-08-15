@@ -48,12 +48,23 @@ methods:{
     if(this.playlist != ""){
        this.$store.state.mustHaveSongs = []
       this.$store.state.doNotPlaySongs = []
+      this.$store.state.test = null,
+      this.$store.state.playlistSongs = []
+      
+  
 
         this.currentPlaylistOwner = this.playlist.dj_id
+        this.$store.state.currentPlaylistOwner = this.playlist.dj_id
         SpotifyService.getPlaylist(this.playlist.playlistId).then((response)=>{
-          
-            this.currentPlaylist =response.data;
+             let temp = response.data
+              let y = temp.tracks.items;
+        for(let track in y){
+          this.$store.state.playlistSongs.push(y[track].track.id)
+        }
+    
+            this.currentPlaylist =temp;
             this.$store.state.currentPlaylist = this.currentPlaylist.id;
+            
         })
         DatabaseService.getPlaylistSongs(this.playlist.playlistId).then((response)=>{
           let songs = response.data;
@@ -68,21 +79,23 @@ methods:{
           }
            
         })
-        let parent = document.getElementById("playlist-container")
-        this.height = parent.offsetHeight
+         
 
-        
       
     }
     else{
+      localStorage.removeItem("currentPlaylist")
       this.currentPlaylistOwner = null;
+      this.$store.state.currentPlaylistOwner = null;
       this.currentPlaylist = null;
       this.$store.state.currentPlaylist = "";
       this.$store.state.mustHaveSongs = []
       this.$store.state.doNotPlaySongs = []
+      this.$store.state.playlistSongs = []
+      
 
     }
-  },
+  }
   
 }
 }

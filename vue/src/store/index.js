@@ -25,6 +25,9 @@ export default new Vuex.Store({
     currentPlaylist : "",
     mustHaveSongs:[],
     doNotPlaySongs:[],
+    playlistSongs:[],
+    currentPlaylistOwner: null,
+    spotifyPlaylist : null,
     
     
 

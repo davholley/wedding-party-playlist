@@ -50,10 +50,18 @@
           <h2>Must-Have Songs</h2>
           <ul>
             <li v-for="song in  $store.state.mustHaveSongs" :key="song.songId"  v-bind:id="'yes'+song.songId"> 
-              <img v-bind:src="song.imageUrl" alt="">
+              <div id="picArrow"> 
+                 <button v-show="!$store.state.playlistSongs.includes(song.songId) && $store.state.currentPlaylistOwner == $store.state.user.id"  @click="addSongToSpotify(song.songId)" v-bind:id="'left'+song.songId"><i class="fa-solid fa-arrow-left fa-2xl"></i></button>
+                <img v-bind:src="song.imageUrl" alt="">
+              </div>
+              
               <span>{{ song.title}} - {{song.artist}}</span>
               
+               
+                
                <button @click="removeSong(song.songId, `yes`+song.songId)"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
+               
+              
               </li>
           </ul>
         </div>
@@ -186,6 +194,14 @@ export default {
     this.$store.state.mustHaveSongs.push(song);
   },
 
+addSongToSpotify(id){
+
+  let uri = `spotify:track:${id}`
+  SpotifyService.addSongToPlaylist(localStorage.getItem("bearer"),this.$store.state.currentPlaylist, uri )
+   document.getElementById(`left${id}`).style.display = "none";
+  
+},
+
   addDoNotPlaySong(track) {
     
     let song = { "playlistId": this.$store.state.currentPlaylist,
@@ -266,6 +282,10 @@ body {
   display: inline-block;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
+}
+#picArrow{
+  display: flex;
+  align-items: center;
 }
 
 h1{
