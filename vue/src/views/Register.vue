@@ -174,6 +174,9 @@ h1{
     margin-top: 10px;
 
 } 
+#username{
+  margin-left: 12px;
+}
 button{
   display: flex;
   justify-content: center;
