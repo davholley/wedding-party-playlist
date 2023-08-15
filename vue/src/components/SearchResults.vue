@@ -67,12 +67,6 @@ ul{
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
 }
-.search-results-container{
-  display: flex;
-  justify-self: center;
-  margin: 0;
-  padding: 0;
-}
 
 .search-results p {
   font-size: 18px;
@@ -88,13 +82,14 @@ ul{
 .search-results li {
   display: flex;
   flex-direction: row;
-  margin-top: 15px;
+  margin : 20px;
+  margin-left: 25px;
   border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  width: 70%;
+  width: 80%;
   background-color: #f9f9f9;
   padding-left: 10%;
 }
@@ -102,7 +97,8 @@ ul{
 .card-content {
   display: flex;
   align-items: center;
-   
+  width: 70%; /* Adjust as needed */
+  padding: 10px;
 }
 
 .card-buttons {
@@ -111,7 +107,7 @@ ul{
   justify-content: center;
   align-items: center;
   width: 30%; /* Adjust as needed */
-  padding: 0;
+  padding: 5px;
 }
 
 button {
