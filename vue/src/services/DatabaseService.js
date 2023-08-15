@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../store";
 
 export default {
 
@@ -18,6 +19,12 @@ export default {
     },
     getOtherUsers(id){
       return axios.get(`/${id}/others`);
+    },
+    removeSong(songId){
+      
+      return  axios.post(`/playlist/${store.state.currentPlaylist}/remove`,{songId},{headers:{'Content-Type': 'application/json'}})
+      
+
     }
   
   }

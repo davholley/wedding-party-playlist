@@ -4,6 +4,7 @@ import com.techelevator.dao.DaoException;
 import com.techelevator.dao.JdbcPostDao;
 import com.techelevator.model.Playlist;
 import com.techelevator.model.Song;
+import com.techelevator.model.SongId;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -53,7 +54,7 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping("/playlist/{id}/remove")
-    public void removeSong(@PathVariable String id, @Valid @RequestBody String SongID){
+    public void removeSong(@PathVariable String id, @RequestBody SongId SongID){
         try{
             jdbcPostDao.removeSong(id,SongID);
         } catch (DaoException e) {

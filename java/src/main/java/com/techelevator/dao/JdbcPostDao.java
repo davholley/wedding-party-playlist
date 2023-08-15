@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Playlist;
 import com.techelevator.model.Song;
+import com.techelevator.model.SongId;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,10 +40,10 @@ public class JdbcPostDao {
             throw new DaoException("Data integrity violation", e);
         }
     }
-    public void removeSong(String playlistId, String id) throws DaoException {
+    public void removeSong(String playlistId, SongId id) throws DaoException {
         String sql = "delete from songs where playlist_id = ? AND song_id = ?;";
         try {
-            jdbcTemplate.update(sql,playlistId,id);
+            jdbcTemplate.update(sql,playlistId,id.getSongId());
 
         }  catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
