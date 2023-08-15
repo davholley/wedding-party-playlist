@@ -27,7 +27,9 @@ export default {
 
     },
     addUserToPlaylist(user){
-      return axios.post(`/playlist/${store.state.currentPlaylist}/add`,{user},{headers:{'Content-Type': 'application/json'}})
+      
+        return axios.post(`/playlist/${store.state.currentPlaylist}/add`,user,{headers:{'Content-Type': 'application/json'}})
+       
     }
   
   }

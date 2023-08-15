@@ -7,8 +7,14 @@
         <div class="list">
         <ul>
             <li v-for="user in otherUsers" v-bind:key="user.id">
-                {{user.username}}
-                <button @click="$emit('add',user)"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
+                <div>
+                    {{user.username}}
+                </div>
+                
+                <div>
+                    <button @click="add(user)"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
+                </div>
+                
                 
                 
             </li>
@@ -30,6 +36,9 @@ export default {
     }
     ,
     methods: {
+        add(user){
+           DatabaseService.addUserToPlaylist(user)
+        },
        
     },
     created(){
@@ -46,11 +55,24 @@ export default {
     justify-content: center;
 }
 .list{
+
     display: flex;
     justify-content: left;
     font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
   font-size: 20px;
+  
+}
+ul{
+    width: 85%;
+}
+li{
+    
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    
 }
 
 </style>

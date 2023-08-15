@@ -62,6 +62,8 @@ export default {
   font-size: 26px;
   align-items: center;
   padding-bottom: 5px ;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
 }
 .song-card img {
   height: 60px;

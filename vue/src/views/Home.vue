@@ -51,7 +51,8 @@
           <ul>
             <li v-for="song in  $store.state.mustHaveSongs" :key="song.songId"  v-bind:id="'yes'+song.songId"> 
               <img v-bind:src="song.imageUrl" alt="">
-              {{ song.title}}
+              <span>{{ song.title}} - {{song.artist}}</span>
+              
                <button @click="removeSong(song.songId, `yes`+song.songId)"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
               </li>
           </ul>
@@ -63,7 +64,8 @@
           <ul>
             <li v-for="song in $store.state.doNotPlaySongs" :key="song.songId" v-bind:id="'no'+song.songId">
               <img v-bind:src="song.imageUrl" alt="">
-              {{ song.title}}
+              <span>{{ song.title}} - {{song.artist}}</span>
+              
               <button @click="removeSong(song.songId, `no`+song.songId)" ><i class="fa-regular fa-trash-can fa-2xl"></i></button>
               
               </li>
@@ -228,11 +230,8 @@ export default {
     // Add the track to the doNotPlay array
     this.$store.state.doNotPlaySongs.push(song);
   },
-  add(user){
-           DatabaseService.addUserToPlaylist(user)
-       }
-    
   },
+  
   created(){
       SpotifyService.getBearer()
       DatabaseService.getPlaylists(this.$store.state.user.id).then((response)=>{
@@ -290,13 +289,13 @@ h1{
   display: grid;
   grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr;
-    z-index: -1;
-    position:relative;
+    
+   
     width: 600px;
     background-color:  #f0f0f0;
     border-radius: 12px;
     border: inset black;
-    left: 100px;
+    margin-left: 100px;
     max-height: 855px;
     
 }
@@ -460,7 +459,7 @@ form{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 5px;
   border-bottom: 1px solid #ccc; /* Add a line between songs */
 }
 .must-have-container li button,
