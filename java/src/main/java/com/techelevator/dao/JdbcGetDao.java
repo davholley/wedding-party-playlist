@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.BasicUser;
 import com.techelevator.model.Playlist;
 import com.techelevator.model.Song;
 import com.techelevator.model.User;
@@ -64,13 +65,16 @@ public class JdbcGetDao {
         return playlist;
     }
 
-    public List<String> getOtherUsers(int id) throws DaoException {
-        List<String> users = new ArrayList<String>();
+    public List<BasicUser> getOtherUsers(int id) throws DaoException {
+        List<BasicUser> users = new ArrayList<BasicUser>();
         String sql = "SELECT * FROM Users WHERE user_id != ?";
         try {
             SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,id);
             while (rowSet.next()) {
-                users.add(rowSet.getString("username") +" "+ rowSet.getString("user_id"));
+                BasicUser user = new BasicUser();
+                user.setId(rowSet.getInt("user_id"));
+                user.setUsername(rowSet.getString("username"));
+                users.add(user);
 
             }
 

@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.DaoException;
 import com.techelevator.dao.JdbcGetDao;
+import com.techelevator.model.BasicUser;
 import com.techelevator.model.Playlist;
 import com.techelevator.model.Song;
 import org.springframework.data.repository.query.Param;
@@ -43,7 +44,7 @@ public class GetController {
 
     @GetMapping("/{id}/others")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<String> getOtherUsers(@PathVariable int id){
+    public List<BasicUser> getOtherUsers(@PathVariable int id){
         try {
             return jdbcGetDao.getOtherUsers(id);
         } catch (DaoException e) {

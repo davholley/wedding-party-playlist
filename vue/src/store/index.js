@@ -24,6 +24,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     currentPlaylist : "",
     mustHaveSongs:[],
+    doNotPlaySongs:[],
     
     
 

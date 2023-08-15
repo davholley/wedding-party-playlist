@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.DaoException;
 import com.techelevator.dao.JdbcPostDao;
+import com.techelevator.model.BasicUser;
 import com.techelevator.model.Playlist;
 import com.techelevator.model.Song;
 import com.techelevator.model.SongId;
@@ -43,10 +44,10 @@ public class PostController {
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PostMapping("/playlist/add/{userId}")
-    public void addUserToPlayList(@Valid @RequestBody String playlistId, @PathVariable int userId){
+    @PostMapping("/playlist/{playlistId}/add")
+    public void addUserToPlayList( @PathVariable String playlistId,@Valid @RequestBody BasicUser userId){
         try {
-            jdbcPostDao.addUserToPlaylist(playlistId,userId);
+            jdbcPostDao.addUserToPlaylist(playlistId,userId.getId());
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

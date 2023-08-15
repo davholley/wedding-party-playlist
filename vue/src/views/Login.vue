@@ -19,11 +19,11 @@
         <input class="userbox" type="text" placeholder="username"  v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <input class="userbox" v-if="isHash" type="text" placeholder="password" id="password" v-model="user.password" required />
+        <input class="userbox" v-if="showPassword" type="text" placeholder="password" id="password" v-model="user.password" required />
         <input class="userbox" v-else type="password" placeholder="password" id="password" v-model="user.password" required />
     
-      <div class="eye">
-          <i class="fa-solid fa-eye-slash" @click="togglePasswordVisibility" :class="{'fa-solid fa-eye' : isHash }"></i>
+      <div class="eye" @click="togglePasswordVisibility" >
+          <i class="fa-solid fa-eye" id="eye"></i>
           <!-- <button class="eye" type="password" id="password"> <i class="fa-solid fa-eye" @click="togglePasswordVisibility"></i></button> -->
       </div>
       </div>
@@ -63,15 +63,26 @@ export default {
      scope : 'playlist-modify-public user-read-email',
 
     url : 'https://accounts.spotify.com/authorize',
-    isHash : false
+    isHash : false,
+    showPassword:false
     };
   },
   methods: {
 
     togglePasswordVisibility(){
-      this.isHash = !this.isHash;
-      const input = document.getElementById("password");
-      input.setAttribute("type", this.isHash ? true : false);
+      this.showPassword = !this.showPassword;
+     let eye = document.getElementById("eye")
+     console.log(eye.classList)
+     if (eye.classList.contains("fa-eye-slash")){
+       eye.classList.remove("fa-eye-slash")
+       eye.classList.add("fa-eye")
+     } else {
+       eye.classList.remove("fa-eye")
+       eye.classList.add("fa-eye-slash")
+       
+     }
+      
+     
     },
   
     spotify(){

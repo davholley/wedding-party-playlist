@@ -16,7 +16,7 @@
           <input class="label" v-model="playlist.name" type="text" placeholder="New Playlist" id="playlistName">
           <input class="label" v-model="playlist.description" type="text" placeholder="Playlist Description" id="playlistDesc">
           <button @click.prevent="createPlaylist">Create Playlist</button>
-        <button class="addUser" @click="selectUsers = !selectUsers"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
+        <button class="addUser" type="button" @click="changeSelectUsers"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
         </form>
         <!-- <add-user></add-user> -->
         
@@ -29,6 +29,9 @@
         
   
       </div>
+      
+      <add class="add" v-show="selectUsers"></add>
+
       
     
 
@@ -75,10 +78,10 @@
 <script>
 import SpotifyService from '../services/SpotifyService';
 import DatabaseService from '../services/DatabaseService';
-
+import Add from "../components/Add.vue";
 import PlayList from '../components/PlayList.vue';
 import SearchResults from '../components/SearchResults.vue';
-// import AddUser from "../components/AddUser.vue";
+
 
 
 
@@ -90,7 +93,8 @@ export default {
   components: { 
     PlayList,
     SearchResults,
-    // AddUser
+    Add,
+    
     
     
      
@@ -127,6 +131,10 @@ export default {
       
       
     },
+    changeSelectUsers(){
+      this.selectUsers = !this.selectUsers
+    }
+    ,
     createPlaylist(){
       
      
@@ -162,9 +170,6 @@ export default {
  toggleButtonText() {
     this.buttonText = this.searchPerformed ? 'Search' : 'Reset';
   },
-  watch: {
-  searchPerformed: 'toggleButtonText',
-},
 
   addMustHaveSong(track) {
       let song = { "playlistId": this.$store.state.currentPlaylist,
@@ -223,9 +228,9 @@ export default {
     // Add the track to the doNotPlay array
     this.$store.state.doNotPlaySongs.push(song);
   },
-  addUser(){
-
-  }
+  add(user){
+           DatabaseService.addUserToPlaylist(user)
+       }
     
   },
   created(){
@@ -281,7 +286,20 @@ h1{
     margin-top: 10px;
 
 } 
-
+.add{
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 1fr;
+    z-index: -1;
+    position:relative;
+    width: 600px;
+    background-color:  #f0f0f0;
+    border-radius: 12px;
+    border: inset black;
+    left: 100px;
+    max-height: 855px;
+    
+}
 
 button {
   display: inline-block;
