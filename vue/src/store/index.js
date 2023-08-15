@@ -28,6 +28,7 @@ export default new Vuex.Store({
     playlistSongs:[],
     currentPlaylistOwner: null,
     spotifyPlaylist : null,
+    hasSpotify: false,
     
     
 
@@ -49,6 +50,7 @@ export default new Vuex.Store({
       localStorage.removeItem('spotifyId');
       localStorage.removeItem('tempUserName');
       localStorage.removeItem('tempPassword');
+      state.hasSpotify= false,
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};

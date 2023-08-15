@@ -146,6 +146,7 @@ export default {
 
       let token = splitParams.access_token;
       localStorage.setItem("bearer" ,token);
+      this.$store.state.hasSpotify= true,
       
       spotifyService.getSpotifyUser(token).then((spotResponse) => {
         let dat = spotResponse.data;

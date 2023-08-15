@@ -2,7 +2,7 @@
    <div class="formfield" id="playlistName"> 
     <div class="selectDiv">
       <label for="playList"></label>
-    <select id="playlistName" name="PlaylistName"  class="formfield-selectbox"
+    <select id="playlistSelect"   class="formfield-selectbox"
         @change="updateSelectionChoice" v-model="playlist">
       <option value="">--- Please Select a Playlist ---</option>
       <option v-for="playlist in Playlists" v-bind:key="playlist.playlistId" v-bind:value="playlist">
@@ -158,6 +158,10 @@ option{
 
 .playlist-songs::-webkit-scrollbar {
   display: none;
+}
+#playlistSelect{
+  border-radius: 12px;
+  border: black inset;
 }
 
 

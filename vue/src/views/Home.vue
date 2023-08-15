@@ -12,12 +12,17 @@
     <div class="main-content">
       <!-- Left Side: Playlist Creation and Container -->
       <div class="playlist-section">
-        <form action="">
+        <form action="" v-if="$store.state.hasSpotify" id="createForm">
           <input class="label" v-model="playlist.name" type="text" placeholder="New Playlist" id="playlistName">
           <input class="label" v-model="playlist.description" type="text" placeholder="Playlist Description" id="playlistDesc">
           <button @click.prevent="createPlaylist">Create Playlist</button>
         <button class="addUser" type="button" @click="changeSelectUsers"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
         </form>
+        <div v-else id="normieSelect">
+          <h2>
+            Selec{{t}}Playlist
+          </h2>
+        </div>
         <!-- <add-user></add-user> -->
         
         <div class="playlist-container" id="playlist-container">
@@ -115,9 +120,10 @@ export default {
   data(){
   return {
   e: '\ue00e',
+  t: '\ue01d',
   playlist: {"public": true},
   DatabasePlaylists: {},
-  hasSpotify: false,
+  
   spotifySearchResults : {},
   spotifyQuery : "",
   searchQuery: '', 
@@ -287,6 +293,16 @@ body {
   display: flex;
   align-items: center;
 }
+#normieSelect{
+  display: flex;
+  justify-content: center;
+  
+}
+#normieSelect h2{
+  font-size: 50px;
+  letter-spacing: 6px;
+  margin: 5px;
+}
 
 h1{
     letter-spacing: 1px;
@@ -394,6 +410,7 @@ form{
 .playlist-container{
   display: flex;;
   padding: 20px;
+  padding-top: 0px;
   justify-content: center;
   max-height: 93%;
   border-radius: 12px;
@@ -455,6 +472,10 @@ form{
   grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr;
  
+}
+#createForm{
+  
+  padding-bottom: 20px;
 }
 .must-have-container img,
 .do-not-play-container img {
