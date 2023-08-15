@@ -13,7 +13,7 @@
     
    
     
-    <div>
+    <div class="playlist-songs">
       <playlist-songs v-bind:Playlist="currentPlaylist" v-bind:PlaylistOwner="currentPlaylistOwner" v-if="currentPlaylist" ></playlist-songs>
     </div>
     
@@ -36,6 +36,7 @@ export default {
     playlist: "",
     currentPlaylist: null,
     currentPlaylistOwner: null,
+    height: null,
     
 
    
@@ -67,6 +68,9 @@ methods:{
           }
            
         })
+        let parent = document.getElementById("playlist-container")
+        this.height = parent.offsetHeight
+
         
       
     }
@@ -103,16 +107,20 @@ option{
 }
 
 .formfield {
-    display: flex;
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    grid-template-areas: "select" "songs";
     flex-wrap: wrap;
     margin-bottom: 1rem;
-    height: 600px;
+    flex-grow: 0;
+    height: 765px;
     width: 80%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
-    justify-content: center;
-    align-items: left;
-    overflow-y: auto;
+    
+    
 
 }
 .formfield-selectbox{
@@ -124,13 +132,20 @@ option{
 }
 .selectDiv{
   display: flex;
-  
+  width: 100%;
   height: 40px;
+  justify-self: center;
   justify-content: center;
   width: 280px;
 }
+.playlist-songs{
+  height: 100%;
+  overflow-y: auto;
+}
 
-.formfield::-webkit-scrollbar {
+.playlist-songs::-webkit-scrollbar {
   display: none;
 }
+
+
 </style>

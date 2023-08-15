@@ -18,7 +18,7 @@
         </form>
         <!-- <add-user></add-user> -->
         
-        <div class="playlist-container">
+        <div class="playlist-container" id="playlist-container">
           <play-list @change="log" v-bind:Playlists="DatabasePlaylists"></play-list>
           
           <!-- ... other playlist related elements ... -->
@@ -322,14 +322,15 @@ form{
   justify-items: center;
   border-radius: 12px;
   border: inset black;
-
+  max-height: 835px;
 }
 .playlist-container{
   display: flex;;
   padding: 20px;
   justify-content: center;
-  
+  max-height: 93%;
   border-radius: 12px;
+  flex-wrap: wrap;
 }
 
 
@@ -340,6 +341,7 @@ form{
   align-items: center;
   font-family: 'JosephSophia';
   width: 50%;
+  
   
 }
 
@@ -360,11 +362,7 @@ form{
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
 }
-.playlist-container{
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
+
 
 .song-container {
   background-color: #f0f0f0;
@@ -382,10 +380,15 @@ form{
   justify-content: center;
 }
 .must-have-container, .do-not-play-container{
+  display: grid;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
   border: black inset;
   border-radius: 12px;
+  max-height: 300px;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 1fr;
+ 
 }
 .must-have-container img,
 .do-not-play-container img {
@@ -397,6 +400,11 @@ form{
 .do-not-play-container ul {
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */
+  overflow-y: auto;
+}
+.must-have-container ul::-webkit-scrollbar,
+.do-not-play-container ul::-webkit-scrollbar {
+  display: none;
 }
 
 .must-have-container li,
