@@ -44,8 +44,8 @@
       <div class="song-containers">
         <!-- Search Box -->
         <div class="search-container">
-          <input class="search-box" v-model="searchQuery" type="text" placeholder="Search for a song...">
-          <button @click.prevent="searchSong">{{ buttonText }}</button>
+          <input  class="search-box" v-model="searchQuery" type="text" placeholder="Search for a song..." v-on:keyup.enter="searchSong" >
+          <button @click.prevent="searchSong" >{{ buttonText }}</button>
           </div>
         <div class="search-results-container">
         <search-results :results="searchResults" :searchPerformed="searchPerformed" v-if="isDropdownOpen" @add-must-have="addMustHaveSong" @add-do-not-play="addDoNotPlaySong" @add-to-playlist="addSongToSpotify"></search-results>
@@ -271,6 +271,7 @@ addSongToSpotify(id){
       if(localStorage.getItem('bearer')){
         this.$store.state.hasSpotify = true;
       }
+      
     },
     comments:{
       PlayList,
