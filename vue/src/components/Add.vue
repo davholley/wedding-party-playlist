@@ -1,17 +1,17 @@
 <template>
     <div>
         <div class="title">
-            <h1>Select users</h1>
+            <h1>Select user{{s}}</h1>
         </div>
         
         <div class="list">
         <ul>
-            <li v-for="user in otherUsers" v-bind:key="user.id">
+            <li v-for="user in otherUsers" v-bind:key="user.id" v-bind:id="'add'+user.id">
                 <div>
                     {{user.username}}
                 </div>
                 
-                <div>
+                <div >
                     <button @click="add(user)"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
                 </div>
                 
@@ -32,12 +32,14 @@ export default {
     data(){
         return{
             otherUsers:[],
+            s:'\ue01c'
         }
     }
     ,
     methods: {
         add(user){
            DatabaseService.addUserToPlaylist(user)
+           document.getElementById(`add${user.id}`).style.display = "none";
         },
        
     },
@@ -56,6 +58,8 @@ button{
 .title{
     display: flex;
     justify-content: center;
+    font-family: 'JosephSophia';
+    letter-spacing: 3px;
 }
 .list{
 
