@@ -62,6 +62,17 @@ public class JdbcPostDao {
             throw new DaoException("Data integrity violation", e);
         }
     }
+    public void RemovePlaylist(String id) throws DaoException {
+        String sql = "delete from playlist_users where playlist_id = ?; delete from songs where playlist_id = ?; delete from playlists where playlist_id = ?";
+        try {
+            jdbcTemplate.update(sql,id,id,id);
+
+        }  catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
 
 
     public void addUserToPlaylist(String id, int userId) throws DaoException {

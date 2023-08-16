@@ -9,7 +9,7 @@
         <div class="card-buttons">
           <button class="must-have-button" @click="$emit('add-must-have', track)"><img src="@/assets/img/heart-svgrepo-com.svg" alt="Add to Must Have"></button>
           <button class="do-not-play-button" @click="$emit('add-do-not-play',track)"><img src="@/assets/img/no-svgrepo-com (1).svg" alt="Add to Do Not Play"></button>
-          <button class="add-to-playlist-button" @click="$emit('add-to-playlist', track)"><img src="@/assets/img/add-to-playlist-svgrepo-com.svg" alt="Add to Playlist"></button>
+          <button v-show="$store.state.currentPlaylistOwner == $store.state.user.id" class="add-to-playlist-button" @click="$emit('add-to-playlist', track.id)"><img src="@/assets/img/add-to-playlist-svgrepo-com.svg" alt="Add to Playlist"></button>
         </div>
         <!-- Add more details as needed -->
       </li>

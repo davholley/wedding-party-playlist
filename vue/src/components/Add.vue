@@ -50,6 +50,9 @@ export default {
 </script>
 
 <style scoped>
+button{
+    border: none;
+}
 .title{
     display: flex;
     justify-content: center;

@@ -30,6 +30,9 @@ export default {
       
         return axios.post(`/playlist/${store.state.currentPlaylist}/add`,user,{headers:{'Content-Type': 'application/json'}})
        
+    },
+    removePlaylist(playlist){
+      return axios.post(`/playlist/remove`,playlist,{headers:{'Content-Type': 'application/json'}})
     }
   
   }

@@ -26,7 +26,7 @@
         <!-- <add-user></add-user> -->
         
         <div class="playlist-container" id="playlist-container">
-          <play-list @change="log" v-bind:Playlists="DatabasePlaylists"></play-list>
+          <play-list ref="testref" v-bind:Playlists="DatabasePlaylists"></play-list>
           
           <!-- ... other playlist related elements ... -->
         </div>
@@ -48,7 +48,7 @@
           <button @click.prevent="searchSong">{{ buttonText }}</button>
           </div>
         <div class="search-results-container">
-        <search-results :results="searchResults" v-if="isDropdownOpen" @add-must-have="addMustHaveSong" @add-do-not-play="addDoNotPlaySong" @add-to-playlist="addSongToPlaylist"></search-results>
+        <search-results :results="searchResults" :searchPerformed="searchPerformed" v-if="isDropdownOpen" @add-must-have="addMustHaveSong" @add-do-not-play="addDoNotPlaySong" @add-to-playlist="addSongToSpotify"></search-results>
         </div>
         <!-- Must-Have Songs Container -->
         <div class="must-have-container song-container" @drop="dropMustHave" @dragover.prevent>
@@ -169,6 +169,9 @@ export default {
     log(){
       console.log("changed")
     },
+    refresh(){
+      this.$refs.testref.updateSelectionChoice()
+    },
   
     searchSong() {
       SpotifyService.searchSong(localStorage.getItem('spotifyBearer'), this.searchQuery).then((response) => {
@@ -203,8 +206,9 @@ export default {
 addSongToSpotify(id){
 
   let uri = `spotify:track:${id}`
-  SpotifyService.addSongToPlaylist(localStorage.getItem("bearer"),this.$store.state.currentPlaylist, uri )
-   document.getElementById(`left${id}`).style.display = "none";
+  SpotifyService.addSongToPlaylist(localStorage.getItem("bearer"),this.$store.state.currentPlaylist, uri ).then(this.$refs.testref.updateSelectionChoice(),this.$refs.testref.updateSelectionChoice() )
+  document.getElementById(`left${id}`).style.display = "none";
+  // this.refresh()
   
 },
 
@@ -261,6 +265,9 @@ addSongToSpotify(id){
         
          
       })
+      if(localStorage.getItem('bearer')){
+        this.$store.state.hasSpotify = true;
+      }
     },
     comments:{
       PlayList,

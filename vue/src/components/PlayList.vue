@@ -1,6 +1,7 @@
 <template>
-   <div class="formfield" id="playlistName"> 
-    <div class="selectDiv">
+   <div class="formfield" id="playlistName">
+     <div class="trashSelect">
+       <div class="selectDiv">
       <label for="playList"></label>
     <select id="playlistSelect"   class="formfield-selectbox"
         @change="updateSelectionChoice" v-model="playlist">
@@ -10,6 +11,9 @@
     </option>
     </select>
     </div>
+     <button v-show="playlist != '' && $store.state.currentPlaylistOwner == $store.state.user.id " @click="deletePlaylist($store.state.currentPlaylist)"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
+    </div> 
+    
     
    
     
@@ -44,6 +48,13 @@ export default {
   }
 ,
 methods:{
+  deletePlaylist(id){
+    let temp = {
+      "id":id 
+    }
+    DatabaseService.removePlaylist(temp)
+    this.$router.go()
+  },
   updateSelectionChoice(){
     if(this.playlist != ""){
        this.$store.state.mustHaveSongs = []
@@ -155,7 +166,13 @@ option{
   height: 100%;
   overflow-y: auto;
 }
-
+.trashSelect{
+  display: flex;
+  justify-content: center;
+}
+.trashSelect button{
+  border: none;
+}
 .playlist-songs::-webkit-scrollbar {
   display: none;
 }

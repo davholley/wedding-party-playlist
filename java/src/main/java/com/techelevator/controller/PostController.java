@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.DaoException;
 import com.techelevator.dao.JdbcPostDao;
-import com.techelevator.model.BasicUser;
-import com.techelevator.model.Playlist;
-import com.techelevator.model.Song;
-import com.techelevator.model.SongId;
+import com.techelevator.model.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -63,6 +60,18 @@ public class PostController {
         }
 
     }
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping("/playlist/remove")
+    public void removePlaylist(@RequestBody BasicPlaylist playlist){
+        try{
+            jdbcPostDao.RemovePlaylist(playlist.getId()); ;
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping("/playlist/{playlistId}")
