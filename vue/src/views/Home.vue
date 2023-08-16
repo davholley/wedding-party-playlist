@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="wholeDisplay">
  <div class="box-outer"> <h1>Welcome Hom{{e}} </h1> </div>
   <div class="home">
     
@@ -16,7 +16,7 @@
           <input class="label" v-model="playlist.name" type="text" placeholder="New Playlist" id="playlistName">
           <input class="label" v-model="playlist.description" type="text" placeholder="Playlist Description" id="playlistDesc">
           <button @click.prevent="createPlaylist">Create Playlist</button>
-        <button class="addUser" type="button" @click="changeSelectUsers"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
+        <button v-show="$store.state.currentPlaylist != ''" class="addUser" type="button" @click="changeSelectUsers"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
         </form>
         <div v-else id="normieSelect">
           <h2>
@@ -26,7 +26,7 @@
         <!-- <add-user></add-user> -->
         
         <div class="playlist-container" id="playlist-container">
-          <play-list ref="testref" v-bind:Playlists="DatabasePlaylists"></play-list>
+          <play-list ref="testref" @closeAdd="closeAdd" v-bind:Playlists="DatabasePlaylists"></play-list>
           
           <!-- ... other playlist related elements ... -->
         </div>
@@ -35,7 +35,7 @@
   
       </div>
       
-      <add class="add" v-show="selectUsers"></add>
+      <add class="add" v-show="selectUsers && $store.state.currentPlaylist != ''"></add>
 
       
     
@@ -54,7 +54,7 @@
         <div class="must-have-container song-container" @drop="dropMustHave" @dragover.prevent>
           <h2>Must-Have Songs</h2>
           <ul>
-            <li v-for="song in  $store.state.mustHaveSongs" :key="song.songId"  v-bind:id="'yes'+song.songId"> 
+            <li v-for="song in $store.state.mustHaveSongs" :key="song.songId"  v-bind:id="'yes'+song.songId"> 
               <div id="picArrow"> 
                  <button v-show="!$store.state.playlistSongs.includes(song.songId) && $store.state.currentPlaylistOwner == $store.state.user.id"  @click="addSongToSpotify(song.songId)" v-bind:id="'left'+song.songId"><i class="fa-solid fa-arrow-left fa-2xl"></i></button>
                 <img v-bind:src="song.imageUrl" alt="">
@@ -146,6 +146,9 @@ export default {
       
       
       
+    },
+    closeAdd(){
+      this.selectUsers = false;
     },
     changeSelectUsers(){
       this.selectUsers = !this.selectUsers
@@ -328,6 +331,10 @@ h1{
     margin-top: 10px;
 
 } 
+.box-outer h1{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 .add{
   display: grid;
   grid-template-rows: 50px 1fr;
@@ -365,7 +372,9 @@ button {
 .addUser svg {
   margin-top: -5px;
 }
-
+.wholeDisplay::-webkit-scrollbar{
+  display: none;
+}
 .userbox {
   background-color: #FEFAE0;
   height: 40px;
@@ -470,6 +479,7 @@ form{
   justify-content: center;
 }
 .must-have-container, .do-not-play-container{
+  text-align: center;
   display: grid;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
@@ -479,6 +489,10 @@ form{
   grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr;
  
+}
+.must-have-container h2, .do-not-play-container h2{
+  font-style: normal;
+  text-decoration: underline;
 }
 #createForm{
   

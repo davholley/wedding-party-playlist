@@ -7,6 +7,7 @@
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
+      
       <div class="form-input-group">
         <input class="userbox"  type="text" placeholder="username" id="username" v-model="user.username" required autofocus />
       </div>
@@ -132,6 +133,11 @@ export default {
   }
   form{
     padding-top: 5%;
+  }
+  .text-center{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
    .form-input-group {

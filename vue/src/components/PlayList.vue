@@ -57,8 +57,7 @@ methods:{
   },
   updateSelectionChoice(){
     if(this.playlist != ""){
-       this.$store.state.mustHaveSongs = []
-      this.$store.state.doNotPlaySongs = []
+       
       this.$store.state.test = null,
       this.$store.state.playlistSongs = []
       
@@ -79,6 +78,8 @@ methods:{
         })
         DatabaseService.getPlaylistSongs(this.playlist.playlistId).then((response)=>{
           let songs = response.data;
+          this.$store.state.mustHaveSongs = []
+        this.$store.state.doNotPlaySongs = []
           
           for (let song in songs) {
             if(songs[song].mustPlay){
@@ -95,6 +96,7 @@ methods:{
       
     }
     else{
+      this.$emit('closeAdd')
       localStorage.removeItem("currentPlaylist")
       this.currentPlaylistOwner = null;
       this.$store.state.currentPlaylistOwner = null;

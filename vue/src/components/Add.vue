@@ -64,7 +64,13 @@ button{
     font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
   font-size: 20px;
+  height: 800px;
+  overflow-y: auto;
+
   
+}
+.list::-webkit-scrollbar{
+    display: none;
 }
 ul{
     width: 85%;

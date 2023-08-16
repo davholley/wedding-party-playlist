@@ -71,8 +71,8 @@ export default {
   padding-right: 10px;
 }
 .song-card span{
-  width: 85%;
-  align-items: center;
+  flex-grow: 1;
+  text-align: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
     
