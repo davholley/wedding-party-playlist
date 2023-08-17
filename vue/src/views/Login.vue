@@ -240,6 +240,11 @@ h1{
     margin: 3px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
+}
+[role=alert] {
+  text-align: center;
+  border-radius: 6px;
+  background-color: rgb(254, 250, 224, .75); ;
 }             
 .userbox{
     background-color: #FEFAE0;

@@ -183,6 +183,11 @@ h1{
 #username{
   margin-left: 12px;
 }
+[role=alert] {
+  text-align: center;
+  border-radius: 6px;
+  background-color: rgb(254, 250, 224, .75); ;
+}  
 button{
   display: flex;
   justify-content: center;
